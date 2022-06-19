@@ -54,7 +54,21 @@ const checkWord = () => {
     if (attempts[key].attempted === false) {
       nodes = [...document.querySelectorAll(`.${key}-word`)];
       console.log(nodes);
-      letters = nodes.map((input) => input.value.toUpperCase());
+      letters = nodes
+        .map((input) => input.value.toUpperCase())
+        .filter((entry) => entry !== '');
+
+      if (letters.length < 5) {
+        for (let i = letters.length; i < 5; i++) {
+          nodes[i].style.borderColor = 'red';
+
+          setTimeout(() => {
+            nodes[i].style.borderColor = 'gray';
+          }, 800);
+        }
+
+        break;
+      }
       wordEntered = letters.join('');
       letters.forEach((letter, i) => {
         if (ANSWER.includes(letter)) {
@@ -94,3 +108,17 @@ const checkWord = () => {
 };
 
 submitButton.addEventListener('click', checkWord);
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') checkWord();
+  else if (e.key !== 'Backspace') {
+    console.log(e.originalTarget);
+    if (e.originalTarget.value) {
+      e.originalTarget.nextElementSibling.focus();
+    }
+  } else if (e.key === 'Backspace') {
+    if (!e.originalTarget.value) {
+      e.originalTarget.previousElementSibling.focus();
+    }
+  }
+});
