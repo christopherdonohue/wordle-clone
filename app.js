@@ -112,7 +112,7 @@ submitButton.addEventListener('click', checkWord);
 // NO NEED
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Enter') checkWord();
-  else if (e.key !== 'Backspace' || e.key === 229) {
+  else if (e.key !== 'Backspace' || e.keyCode === 229) {
     console.log(e.originalTarget);
     if (e.originalTarget.value) {
       e.originalTarget.nextElementSibling.focus();
