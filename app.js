@@ -80,6 +80,9 @@ const checkWord = () => {
   let nextAttempt;
   let letterCountAnswer;
   let letterCountAttempt;
+  let arr2 = [];
+  let tempNodes = [];
+  let attemptedLetterToWatch;
   let tempAnswer = [...ANSWER];
   for (const key in attempts) {
     if (attempts[key].attempted === false) {
@@ -104,10 +107,7 @@ const checkWord = () => {
       wordEntered = letters.join('');
       letterCountAnswer = countLetters([...ANSWER]);
       letterCountAttempt = countLetters(letters);
-      let arr2 = [];
-      let tempNodes = [];
-      let anotherArr = [];
-      let attemptedLetterToWatch;
+
       letters.forEach((letter, i) => {
         if (tempAnswer.includes(letter)) {
           let obj = { character: null, amount: 0 };
@@ -136,9 +136,20 @@ const checkWord = () => {
 
           if (letter === ANSWER[i]) {
             nodes[i].style.backgroundColor = 'green';
-            if (attemptedLetterToWatch.amount > letterToWatch.amount) {
-              tempNodes[0].style.backgroundColor = '#404040';
-              tempNodes.shift();
+            if (attemptedLetterToWatch.amount >= letterToWatch.amount) {
+              for (let i = 0; i < nodes.length; i++) {
+                if (
+                  nodes[i].style.backgroundColor === 'rgb(204, 204, 0)' &&
+                  nodes[i].value.toUpperCase() ===
+                    attemptedLetterToWatch.character &&
+                  i !== 3
+                ) {
+                  nodes[i].style.backgroundColor = '#404040';
+                  // attemptedLetterToWatch.amount--;
+                  break;
+                  // tempNodes.shift();
+                }
+              }
             }
           }
         } else {
@@ -176,8 +187,6 @@ const checkWord = () => {
 };
 
 const disableAttempts = () => {
-  let nodes;
-  let index = 0;
   for (const key in attempts) {
     if (attempts[key].attempted === false) {
       nodes = [...document.querySelectorAll(`.${key}-word`)];
@@ -187,9 +196,6 @@ const disableAttempts = () => {
 
 submitButton.addEventListener('click', checkWord);
 
-document.addEventListener('contextmenu', () => false);
-
-// NO NEED
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Enter') checkWord();
   else if (e.key !== 'Backspace') {
