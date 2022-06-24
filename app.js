@@ -10,7 +10,7 @@ const POTENTIAL_WORDS = ['SPARK','MANGO','SPLAT','TOUCH','CLOWN','HAPPY', 'TOWEL
 
 let ANSWER =
   POTENTIAL_WORDS[Math.floor(Math.random() * POTENTIAL_WORDS.length)];
-ANSWER = 'KOALA';
+
 console.log(ANSWER);
 
 const winOrLose = document.querySelector('.win-or-loss-container');
