@@ -197,7 +197,6 @@ const disableAttempts = () => {
 submitButton.addEventListener('click', checkWord);
 
 document.addEventListener('keydown', (e) => {
-  console.log(e);
   if (e.key === 'Enter') checkWord();
   else if (e.key !== 'Backspace') {
     if (e.target.value) {
