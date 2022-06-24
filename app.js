@@ -1,41 +1,50 @@
 // WORDLE CLONE
-// Chris Donohue - June 18th, 2022
-// TODO: Implement ability to check for potential words, find some way to get words from dictionary api?
-
+// Chris Donohue
 // prettier-ignore
+//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! CHEATER CHEATER CHEATER CLOSE THE DEV TOOLS !!!!!!!!!!!!!!!!!!!!!!!!!
 const POTENTIAL_WORDS = ['SPARK','MANGO','SPLAT','TOUCH','CLOWN','HAPPY', 'TOWEL', 'ALPHA', 'ATONE', 'BAYOU',
- 'RAFTS', 'MAKES','SKATE','OOZES', 'SPEAR', 'BOARD', 'BORED', 'CLAMP','LAMPS', 'OPERA', 'CRATE', 'GREAT', 'FAITH',
-'LOFTS', 'BOMBS', 'OVALS', 'WATER', 'ROGUE', 'GLOOM', 'SAPPY', 'ORDER', 'HARDY', 'STOUT', 'EERIE', 'PURSE', 'CURSE'];
+ 'MOVIE', 'MAKES','SKATE','OOZES', 'SPEAR', 'BOARD', 'BORED', 'CLAMP','NORTH', 'OPERA', 'CRATE', 'GREAT', 'FAITH',
+'FORTH', 'LUNCH', 'MORAL', 'WATER', 'ROGUE', 'GLOOM', 'SAPPY', 'ORDER', 'HARDY', 'STOUT', 'EERIE', 'PURSE', 'CURSE',
+'CHORD', 'NAKED', 'WRATH', 'KNEEL', 'GNOME', 'EXTRA', 'TOXIC', 'HEAVE', 'MOTOR', 'YEARN', 'DRAWN', 'ULTRA', 'POLAR',
+'LUCKY', 'JELLY', 'KOALA', 'EVENT', 'DELTA', 'HONOR', 'TIGHT', 'ABODE', 'WHARF', 'SOOTH'];
 
-const ANSWER =
+let ANSWER =
   POTENTIAL_WORDS[Math.floor(Math.random() * POTENTIAL_WORDS.length)];
+ANSWER = 'KOALA';
 console.log(ANSWER);
+
 const winOrLose = document.querySelector('.win-or-loss-container');
+
 let attempts = {
   first: {
     attempted: false,
     correct: null,
     wordEntered: '',
+    nextAttempt: 'second',
   },
   second: {
     attempted: false,
     correct: null,
     wordEntered: '',
+    nextAttempt: 'third',
   },
   third: {
     attempted: false,
     correct: null,
     wordEntered: '',
+    nextAttempt: 'fourth',
   },
   fourth: {
     attempted: false,
     correct: null,
     wordEntered: '',
+    nextAttempt: 'fifth',
   },
   fifth: {
     attempted: false,
     correct: null,
     wordEntered: '',
+    nextAttempt: 'sixth',
   },
   sixth: {
     attempted: false,
@@ -45,15 +54,38 @@ let attempts = {
 };
 const submitButton = document.querySelector('.submit');
 
+const countLetters = (word) => {
+  let arr = [];
+  let letterAlreadyExists;
+  for (let i = 0; i < word.length; i++) {
+    let count = { character: null, amount: 0 };
+    letterAlreadyExists = arr.some((obj) => obj.character === word[i]);
+    if (!letterAlreadyExists) {
+      count.character = word[i];
+      for (let j = 0; j < word.length; j++) {
+        if (word[i] === word[j]) {
+          count.amount++;
+        }
+      }
+      arr.push(count);
+    }
+  }
+  return arr;
+};
+
 const checkWord = () => {
   let letters;
   let wordEntered;
   let nodes;
-
+  let nextAttempt;
+  let letterCountAnswer;
+  let letterCountAttempt;
+  let tempAnswer = [...ANSWER];
   for (const key in attempts) {
     if (attempts[key].attempted === false) {
       nodes = [...document.querySelectorAll(`.${key}-word`)];
-      console.log(nodes);
+      nextAttempt = attempts[key].nextAttempt;
+      nextAttemptNodes = [...document.querySelectorAll(`.${nextAttempt}-word`)];
       letters = nodes
         .map((input) => input.value.toUpperCase())
         .filter((entry) => entry !== '');
@@ -70,11 +102,44 @@ const checkWord = () => {
         break;
       }
       wordEntered = letters.join('');
+      letterCountAnswer = countLetters([...ANSWER]);
+      letterCountAttempt = countLetters(letters);
+      let arr2 = [];
+      let tempNodes = [];
+      let anotherArr = [];
+      let attemptedLetterToWatch;
       letters.forEach((letter, i) => {
-        if (ANSWER.includes(letter)) {
-          nodes[i].style.backgroundColor = '#CCCC00';
+        if (tempAnswer.includes(letter)) {
+          let obj = { character: null, amount: 0 };
+          let letterToWatch = letterCountAnswer.find(
+            (element) => element.character === letter
+          );
+
+          if (arr2.some((el) => el.character === letter)) {
+            arr2[arr2.findIndex((el) => el.character === letter)].amount++;
+          } else {
+            obj.character = letter;
+            obj.amount++;
+            arr2.push(obj);
+          }
+
+          attemptedLetterToWatch = arr2.find(
+            (element) => element.character === letter
+          );
+
+          if (attemptedLetterToWatch.amount <= letterToWatch.amount) {
+            nodes[i].style.backgroundColor = '#CCCC00';
+            tempNodes.push(nodes[i]);
+          } else {
+            nodes[i].style.backgroundColor = '#404040';
+          }
+
           if (letter === ANSWER[i]) {
             nodes[i].style.backgroundColor = 'green';
+            if (attemptedLetterToWatch.amount > letterToWatch.amount) {
+              tempNodes[0].style.backgroundColor = '#404040';
+              tempNodes.shift();
+            }
           }
         } else {
           nodes[i].style.backgroundColor = '#404040';
@@ -83,6 +148,9 @@ const checkWord = () => {
 
       attempts[key].wordEntered = wordEntered;
       attempts[key].attempted = true;
+      nodes.forEach((node) => (node.disabled = true));
+      nextAttemptNodes.forEach((node) => (node.disabled = false));
+      key !== 'sixth' && nextAttemptNodes[0].focus();
       attempts[key].correct = wordEntered === ANSWER;
       // WIN
       if (attempts[key].correct === true) {
@@ -107,13 +175,24 @@ const checkWord = () => {
   }
 };
 
+const disableAttempts = () => {
+  let nodes;
+  let index = 0;
+  for (const key in attempts) {
+    if (attempts[key].attempted === false) {
+      nodes = [...document.querySelectorAll(`.${key}-word`)];
+    }
+  }
+};
+
 submitButton.addEventListener('click', checkWord);
+
+document.addEventListener('contextmenu', () => false);
 
 // NO NEED
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Enter') checkWord();
-  else if (e.key !== 'Backspace' || e.keyCode === 229) {
-    console.log(e.originalTarget);
+  else if (e.key !== 'Backspace') {
     if (e.originalTarget.value) {
       e.originalTarget.nextElementSibling.focus();
     }

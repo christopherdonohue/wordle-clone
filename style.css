@@ -18,6 +18,7 @@ body {
   height: 90vh;
   justify-content: center;
   align-items: center;
+  position: relative;
 }
 
 .main-container-outer {
@@ -56,6 +57,7 @@ input {
 }
 
 .submit {
+  display: none;
   width: 50%;
   margin-top: 0.5em;
   padding-top: 0.5em;
@@ -76,16 +78,23 @@ input {
 .win-or-loss-container {
   display: none;
   position: absolute;
-  transform: translateX(220%);
-  border: 1px solid red;
+  background-color: rgb(23, 23, 25, 0.95);
+  transform: translateX(250%);
+  border: 2px solid red;
   color: red;
   border-radius: 4px;
   width: 15rem;
   height: 25rem;
-  margin-left: 1em;
   text-align: center;
   font-size: 90px;
   font-family: Arial, Helvetica, sans-serif;
+}
+
+@media (max-width: 1469px) {
+  .win-or-loss-container {
+    position: absolute;
+    right: 0;
+  }
 }
 
 @media (max-width: 798px) {
@@ -177,6 +186,11 @@ input {
 }
 
 @media (max-width: 431px) {
+  .win-or-loss-container {
+    transform: translatex(0%);
+    width: scale(-2);
+  }
+
   .main-container {
     display: grid;
     grid-template-columns: repeat(5, 4rem);
