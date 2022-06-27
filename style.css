@@ -51,7 +51,7 @@ body {
 
 .key {
   background: gray;
-  width: 2em;
+  width: 1.5em;
   height: 3.3em;
   border: 1px solid gray;
   border-radius: 2px;
@@ -252,8 +252,8 @@ input {
     box-sizing: border-box;
     background-color: rgb(23, 23, 25);
     width: 100vw;
-    height: 100vh;
-    min-height: 500px;
+    /* height: 100vh; */
+    /* min-height: 500px; */
     display: flex;
     flex-direction: column;
     /* gap: 0.35em; */
