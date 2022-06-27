@@ -51,8 +51,8 @@ body {
 
 .key {
   background: gray;
-  width: 1.9em;
-  height: 3em;
+  width: 1.5em;
+  height: 3.3em;
   border: 1px solid gray;
   border-radius: 2px;
   padding: 0.4em;
@@ -247,9 +247,23 @@ input {
 }
 
 @media (max-width: 349px) {
+  body {
+    margin: 0;
+    box-sizing: border-box;
+    background-color: rgb(23, 23, 25);
+    width: 100vw;
+    height: 100vh;
+    min-height: 500px;
+    display: flex;
+    flex-direction: column;
+    /* gap: 0.35em; */
+    /* justify-content: center; */
+    /* align-items: center; */
+  }
+
   .main-container {
     display: grid;
-    grid-template-columns: repeat(5, 3.5rem);
+    grid-template-columns: repeat(5, 3rem);
     gap: 0.25em;
     width: 100%;
     justify-content: center;
@@ -269,7 +283,7 @@ input {
     color: white;
     font-size: 45px;
     text-align: center;
-    height: 3.5rem;
+    height: 3rem;
   }
 }
 
