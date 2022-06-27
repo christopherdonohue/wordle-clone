@@ -39,7 +39,7 @@ body {
   /* align-items: center; */
   /* border: 1px solid gray; */
   border-radius: 4px;
-  padding-top: 1em;
+  /* padding-top: 0.25em; */
   padding-bottom: 0.5em;
   flex-wrap: wrap;
   /* min-width: 678px; */
@@ -51,8 +51,8 @@ body {
 
 .key {
   background: gray;
-  width: 1.8em;
-  height: 3.2em;
+  width: 1.9em;
+  height: 3em;
   border: 1px solid gray;
   border-radius: 2px;
   padding: 0.4em;
@@ -222,7 +222,7 @@ input {
 
   .main-container {
     display: grid;
-    grid-template-columns: repeat(5, 4rem);
+    grid-template-columns: repeat(5, 3.5rem);
     gap: 0.4em;
     width: 100%;
     justify-content: center;
@@ -242,7 +242,7 @@ input {
     color: white;
     font-size: 50px;
     text-align: center;
-    height: 4rem;
+    height: 3.5rem;
   }
 }
 
