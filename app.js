@@ -214,6 +214,10 @@ document.addEventListener('keydown', (e) => {
 
 KEYBOARD.forEach((key) => {
   key.addEventListener('click', (e) => {
+    const ALLINPUTS = [...document.getElementsByTagName('input')];
+    ALLINPUTS.forEach((input) => {
+      input.readOnly = true;
+    });
     for (const attr in attempts) {
       if (attempts[attr].attempted === false) {
         nodes = [...document.querySelectorAll(`.${attr}-word`)];
