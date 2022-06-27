@@ -14,6 +14,7 @@ let ANSWER =
 console.log(ANSWER);
 
 const winOrLose = document.querySelector('.win-or-loss-container');
+const KEYBOARD = [...document.querySelectorAll('.key')];
 
 let attempts = {
   first: {
@@ -53,6 +54,7 @@ let attempts = {
   },
 };
 const submitButton = document.querySelector('.submit');
+let keyboardIndex = 0;
 
 const countLetters = (word) => {
   let arr = [];
@@ -181,6 +183,7 @@ const checkWord = () => {
         submitButton.style.pointerEvents = 'none';
         winOrLose.children[1].textContent = '☹';
       }
+      keyboardIndex = 0;
       break;
     }
   }
@@ -207,4 +210,29 @@ document.addEventListener('keydown', (e) => {
       e.target.previousElementSibling.focus();
     }
   }
+});
+
+KEYBOARD.forEach((key) => {
+  key.addEventListener('click', (e) => {
+    for (const attr in attempts) {
+      if (attempts[attr].attempted === false) {
+        nodes = [...document.querySelectorAll(`.${attr}-word`)];
+        console.log(key.innerHTML);
+        if (key.innerHTML === 'Enter') {
+          checkWord();
+          break;
+        } else if (key.innerHTML === 'Backspace') {
+          nodes[keyboardIndex - 1].value = '';
+          nodes[keyboardIndex - 1].focus();
+          keyboardIndex--;
+          break;
+        } else {
+          nodes[keyboardIndex].value = key.innerHTML;
+          nodes[keyboardIndex].nextElementSibling.focus();
+          keyboardIndex++;
+          break;
+        }
+      }
+    }
+  });
 });

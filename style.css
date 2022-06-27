@@ -45,6 +45,35 @@ body {
   /* min-width: 678px; */
 }
 
+.keyboard-container {
+  grid-column: span 5;
+}
+
+.key {
+  background: gray;
+  width: 1.8em;
+  height: 3.2em;
+  border: 1px solid gray;
+  border-radius: 2px;
+  padding: 0.4em;
+  margin: 1px;
+  text-align: center;
+  font-weight: bold;
+  color: rgb(225, 225, 225);
+  font-size: 0.8rem;
+  margin: 0.1em;
+  margin-top: 0.5em;
+}
+
+.hidden-key {
+  opacity: 0;
+  width: 1em;
+}
+
+.key.special {
+  width: 48%;
+}
+
 input {
   background-color: transparent;
   border: 1px solid gray;
