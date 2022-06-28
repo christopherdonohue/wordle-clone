@@ -23,7 +23,7 @@ body {
 
 .main-container-outer {
   display: flex;
-  justify-content: center;
+  /* justify-content: center; */
   align-items: center;
   flex-direction: column;
   gap: 0.5em;
@@ -67,7 +67,7 @@ body {
 .key {
   background: gray;
   width: 2.2em;
-  height: 3.3em;
+  height: 3.8em;
   border: 1px solid gray;
   border-radius: 2px;
   text-align: center;
