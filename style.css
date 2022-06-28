@@ -23,9 +23,10 @@ body {
 
 .main-container-outer {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
   flex-direction: column;
+  gap: 0.5em;
   width: 100vw;
   height: 100vh;
 }
@@ -44,20 +45,35 @@ body {
   flex-wrap: wrap;
   /* min-width: 678px; */
 }
+/* 
+.keyboard-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+} */
 
 .keyboard-container {
   width: 100vw;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  /* grid-template-columns: repeat(10, 2.2em); */
+  gap: 4px;
+  justify-content: center;
+  align-items: center;
+  margin-top: 0;
 }
 
 .key {
   background: gray;
-  width: 2em;
+  width: 2.4em;
   height: 3.3em;
   border: 1px solid gray;
   border-radius: 2px;
-  margin: 0;
   text-align: center;
-  color: rgb(225, 225, 225);
+  color: rgb(223, 223, 223);
+  font-size: 0.85rem;
+  font-weight: bolder;
 }
 
 .hidden-key {
@@ -66,7 +82,15 @@ body {
 }
 
 .key.special {
-  width: 48%;
+  width: 10em;
+}
+
+.keyboard-row.four {
+  width: 100%;
+  display: inherit;
+  flex-direction: row;
+  justify-content: center;
+  gap: 4px;
 }
 
 input {
@@ -78,25 +102,6 @@ input {
   text-align: center;
   outline: none;
   text-transform: uppercase;
-}
-
-.submit {
-  display: none;
-  width: 50%;
-  margin-top: 0.5em;
-  padding-top: 0.5em;
-  padding-bottom: 0.5em;
-  border-radius: 4px;
-  background-color: transparent;
-  color: aliceblue;
-  border: 1px solid gray;
-  font-size: x-large;
-}
-
-.submit:hover {
-  background-color: gray;
-  transition: 0.17s;
-  cursor: pointer;
 }
 
 .win-or-loss-container {
@@ -123,7 +128,6 @@ input {
 
 @media (max-width: 798px) {
   .main-container {
-    outline: 1px solid lawngreen;
     display: grid;
     grid-template-columns: repeat(5, 7rem);
     gap: 0.75em;
@@ -158,7 +162,6 @@ input {
 
 @media (max-width: 676px) {
   .main-container {
-    outline: 1px solid purple;
     display: grid;
     grid-template-columns: repeat(5, 6rem);
     gap: 0.4em;
@@ -186,7 +189,6 @@ input {
 
 @media (max-width: 502px) {
   .main-container {
-    outline: 1px solid orange;
     display: grid;
     grid-template-columns: repeat(5, 5rem);
     gap: 0.4em;
@@ -219,7 +221,6 @@ input {
   }
 
   .main-container {
-    outline: 1px solid pink;
     display: grid;
     grid-template-columns: repeat(5, 3.5rem);
     gap: 0.4em;
@@ -246,22 +247,7 @@ input {
 }
 
 @media (max-width: 349px) {
-  body {
-    margin: 0;
-    box-sizing: border-box;
-    background-color: rgb(23, 23, 25);
-    width: 100vw;
-    /* height: 100vh; */
-    /* min-height: 500px; */
-    display: flex;
-    flex-direction: column;
-    /* gap: 0.35em; */
-    /* justify-content: center; */
-    /* align-items: center; */
-  }
-
   .main-container {
-    outline: 1px solid green;
     display: grid;
     grid-template-columns: repeat(5, 3rem);
     gap: 0.25em;

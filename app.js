@@ -16,6 +16,8 @@ console.log(ANSWER);
 const winOrLose = document.querySelector('.win-or-loss-container');
 const KEYBOARD = [...document.querySelectorAll('.key')];
 
+console.log(KEYBOARD);
+
 let attempts = {
   first: {
     attempted: false,
@@ -53,7 +55,7 @@ let attempts = {
     wordEntered: '',
   },
 };
-const submitButton = document.querySelector('.submit');
+
 let keyboardIndex = 0;
 
 const countLetters = (word) => {
@@ -171,7 +173,6 @@ const checkWord = () => {
         winOrLose.style.borderColor = 'green';
         winOrLose.firstChild.textContent = 'Win!';
         winOrLose.style.color = 'green';
-        submitButton.style.pointerEvents = 'none';
         winOrLose.children[1].textContent = '☺';
       }
       // OUT OF ATTEMPTS
@@ -180,7 +181,6 @@ const checkWord = () => {
         winOrLose.style.borderColor = 'red';
         winOrLose.firstChild.textContent = 'Loss!';
         winOrLose.style.color = 'red';
-        submitButton.style.pointerEvents = 'none';
         winOrLose.children[1].textContent = '☹';
       }
       keyboardIndex = 0;
@@ -196,8 +196,6 @@ const disableAttempts = () => {
     }
   }
 };
-
-submitButton.addEventListener('click', checkWord);
 
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Enter') checkWord();
