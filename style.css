@@ -67,7 +67,7 @@ body {
 .key {
   background: gray;
   width: 1.5em;
-  height: 3.2em;
+  height: 3em;
   border: 1px solid gray;
   border-radius: 2px;
   text-align: center;
@@ -82,7 +82,7 @@ body {
 }
 
 .key.special {
-  width: 10em;
+  width: 8em;
 }
 
 .keyboard-row.four {
