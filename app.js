@@ -132,14 +132,23 @@ const checkWord = () => {
           );
 
           if (attemptedLetterToWatch.amount <= letterToWatch.amount) {
-            nodes[i].style.backgroundColor = '#CCCC00';
+            nodes[i].style.backgroundColor = 'rgb(180, 180, 0)';
+            nodes[i].style.borderColor = 'rgb(180, 180, 0)';
             tempNodes.push(nodes[i]);
+            KEYBOARD.forEach((key) => {
+              if (key.innerHTML === letter) {
+                key.style.backgroundColor = 'rgb(180, 180, 0)';
+                key.style.borderColor = 'rgb(180, 180, 0)';
+              }
+            });
           } else {
             nodes[i].style.backgroundColor = '#404040';
+            nodes[i].style.borderColor = '#404040';
           }
 
           if (letter === ANSWER[i]) {
             nodes[i].style.backgroundColor = 'green';
+            nodes[i].style.borderColor = 'green';
             if (attemptedLetterToWatch.amount >= letterToWatch.amount) {
               for (let i = 0; i < nodes.length; i++) {
                 if (
@@ -149,15 +158,30 @@ const checkWord = () => {
                   i !== 3
                 ) {
                   nodes[i].style.backgroundColor = '#404040';
+                  nodes[i].style.borderColor = '#404040';
                   // attemptedLetterToWatch.amount--;
                   break;
                   // tempNodes.shift();
                 }
               }
             }
+            KEYBOARD.forEach((key) => {
+              if (key.innerHTML === letter) {
+                key.style.backgroundColor = 'green';
+                key.style.borderColor = 'green';
+              }
+            });
           }
         } else {
           nodes[i].style.backgroundColor = '#404040';
+          nodes[i].style.borderColor = '#404040';
+          KEYBOARD.forEach((key) => {
+            if (key.innerHTML === letter) {
+              key.style.backgroundColor = '#404040';
+              key.style.borderColor = '#404040';
+              key.style.color = 'rgba(255, 255, 255, 0.6)';
+            }
+          });
         }
       });
 
@@ -223,7 +247,7 @@ KEYBOARD.forEach((key) => {
         if (key.innerHTML === 'Enter') {
           checkWord();
           break;
-        } else if (key.innerHTML === 'Backspace') {
+        } else if (key.id === 'backspace-key') {
           nodes[keyboardIndex - 1].value = '';
           nodes[keyboardIndex - 1].focus();
           keyboardIndex--;
