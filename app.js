@@ -240,7 +240,7 @@ const checkWord = () => {
         }!`;
         winOrLose.style.color = 'green';
         winOrLose.childNodes[3].childNodes[0].innerHTML = `Current Score: \n${score}`;
-        winOrLose.childNodes[3].childNodes[0].style.fontSize = '2.6rem';
+        winOrLose.childNodes[3].childNodes[0].style.fontSize = '2rem';
         NEWGAME.style.borderColor = 'green';
         NEWGAME.style.backgroundColor = 'green';
 
