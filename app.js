@@ -175,7 +175,7 @@ const checkWord = () => {
             if (attemptedLetterToWatch.amount >= letterToWatch.amount) {
               for (let i = 0; i < nodes.length; i++) {
                 if (
-                  nodes[i].style.backgroundColor === 'rgb(204, 204, 0)' &&
+                  nodes[i].style.backgroundColor === 'rgb(180, 180, 0)' &&
                   nodes[i].value.toUpperCase() ===
                     attemptedLetterToWatch.character &&
                   i !== 3
