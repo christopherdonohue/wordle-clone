@@ -37,6 +37,7 @@ console.log(ANSWER);
 const winOrLose = document.querySelector('.win-or-loss-container');
 const KEYBOARD = [...document.querySelectorAll('.key')];
 const NEWGAME = document.querySelector('.btn-new-game');
+let correctWord = document.querySelector('.correct-word');
 
 let score = localStorage.getItem('score') ? +localStorage.getItem('score') : 0;
 
@@ -245,21 +246,36 @@ const checkWord = () => {
         winOrLose.childNodes[3].childNodes[0].style.fontSize = '2rem';
         NEWGAME.style.borderColor = 'green';
         NEWGAME.style.backgroundColor = 'green';
+        correctWord.style.display = 'none';
 
         localStorage.setItem('score', score);
       }
       // OUT OF ATTEMPTS
       if (key === 'sixth' && attempts[key].correct === false) {
+        let answer = document.createElement('p');
+        let finalScore = document.createElement('p');
+        let answerWas = document.createElement('p');
+        let wrapperDiv = document.createElement('div');
+        answerWas.innerHTML = 'Answer Was:';
+        answerWas.style.marginBottom = 0;
+        answer.style.marginTop = 0;
+        answer.classList.add('animation');
+        finalScore.style.marginTop = 0;
+        finalScore.innerHTML = score;
+        answer.innerHTML = ANSWER;
         winOrLose.style.display = 'grid';
         winOrLose.style.borderColor = 'red';
         winOrLose.childNodes[1].childNodes[0].innerHTML = `${
           FAIL_WORDS[Math.floor(Math.random() * FAIL_WORDS.length)]
         }...`;
         winOrLose.style.color = 'red';
-        winOrLose.childNodes[3].childNodes[0].innerHTML = `Final Score: \n${score}`;
-        winOrLose.childNodes[3].childNodes[0].style.fontSize = '2.6rem';
+        winOrLose.childNodes[3].childNodes[0].innerHTML = `Final Score:`;
+        winOrLose.childNodes[3].appendChild(finalScore);
+        winOrLose.childNodes[3].firstChild.style.marginBottom = 0;
         NEWGAME.style.borderColor = 'red';
         NEWGAME.style.backgroundColor = 'red';
+        correctWord.appendChild(answerWas);
+        correctWord.appendChild(answer);
         score = 0;
         localStorage.setItem('score', score);
       }
