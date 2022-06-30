@@ -8,6 +8,25 @@ const POTENTIAL_WORDS = ['SPARK','MANGO','SPLAT','TOUCH','CLOWN','HAPPY', 'TOWEL
 'CHORD', 'NAKED', 'WRATH', 'KNEEL', 'GNOME', 'EXTRA', 'TOXIC', 'HEAVE', 'MOTOR', 'YEARN', 'DRAWN', 'ULTRA', 'POLAR',
 'LUCKY', 'JELLY', 'KOALA', 'EVENT', 'DELTA', 'HONOR', 'TIGHT', 'ABODE', 'WHARF', 'SOOTH'];
 
+const SUCCESS_WORDS = [
+  'Nice',
+  'Excellent',
+  'Keep Going',
+  'Rock On',
+  'Hell Yeah',
+  'Amazing',
+  'You Got It',
+];
+const FAIL_WORDS = [
+  'OOF',
+  'SORRY',
+  'NEXT TIME',
+  'NOT QUITE',
+  "CAN'T WIN EM ALL",
+  'YIKES',
+  'NOPE',
+];
+
 let ANSWER =
   POTENTIAL_WORDS[Math.floor(Math.random() * POTENTIAL_WORDS.length)];
 
@@ -15,8 +34,9 @@ console.log(ANSWER);
 
 const winOrLose = document.querySelector('.win-or-loss-container');
 const KEYBOARD = [...document.querySelectorAll('.key')];
+const NEWGAME = document.querySelector('.btn-new-game');
 
-console.log(KEYBOARD);
+let score = localStorage.getItem('score') ? +localStorage.getItem('score') : 0;
 
 let attempts = {
   first: {
@@ -193,19 +213,53 @@ const checkWord = () => {
       attempts[key].correct = wordEntered === ANSWER;
       // WIN
       if (attempts[key].correct === true) {
-        winOrLose.style.display = 'initial';
+        switch (key) {
+          case 'first':
+            score += 150;
+            break;
+          case 'second':
+            score += 125;
+            break;
+          case 'third':
+            score += 100;
+            break;
+          case 'fourth':
+            score += 50;
+            break;
+          case 'fifth':
+            score += 25;
+            break;
+          case 'sixth':
+            score += 10;
+            break;
+        }
+        winOrLose.style.display = 'grid';
         winOrLose.style.borderColor = 'green';
-        winOrLose.firstChild.textContent = 'Win!';
+        winOrLose.childNodes[1].childNodes[0].innerHTML = `${
+          SUCCESS_WORDS[Math.floor(Math.random() * SUCCESS_WORDS.length)]
+        }!`;
         winOrLose.style.color = 'green';
-        winOrLose.children[1].textContent = '☺';
+        winOrLose.childNodes[3].childNodes[0].innerHTML = `Current Score: \n${score}`;
+        winOrLose.childNodes[3].childNodes[0].style.fontSize = '2.6rem';
+        NEWGAME.style.borderColor = 'green';
+        NEWGAME.style.backgroundColor = 'green';
+
+        localStorage.setItem('score', score);
       }
       // OUT OF ATTEMPTS
       if (key === 'sixth' && attempts[key].correct === false) {
-        winOrLose.style.display = 'initial';
+        winOrLose.style.display = 'grid';
         winOrLose.style.borderColor = 'red';
-        winOrLose.firstChild.textContent = 'Loss!';
+        winOrLose.childNodes[1].childNodes[0].innerHTML = `${
+          FAIL_WORDS[Math.floor(Math.random() * FAIL_WORDS.length)]
+        }...`;
         winOrLose.style.color = 'red';
-        winOrLose.children[1].textContent = '☹';
+        winOrLose.childNodes[3].childNodes[0].innerHTML = `Final Score: \n${score}`;
+        winOrLose.childNodes[3].childNodes[0].style.fontSize = '2.6rem';
+        NEWGAME.style.borderColor = 'red';
+        NEWGAME.style.backgroundColor = 'red';
+        score = 0;
+        localStorage.setItem('score', score);
       }
       keyboardIndex = 0;
       break;
@@ -262,3 +316,5 @@ KEYBOARD.forEach((key) => {
     }
   });
 });
+
+NEWGAME.addEventListener('click', () => history.go(0));
