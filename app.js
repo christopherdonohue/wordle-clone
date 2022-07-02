@@ -38,8 +38,13 @@ const winOrLose = document.querySelector('.win-or-loss-container');
 const KEYBOARD = [...document.querySelectorAll('.key')];
 const NEWGAME = document.querySelector('.btn-new-game');
 let correctWord = document.querySelector('.correct-word');
+let streakNodes = [...document.querySelectorAll('.streak')];
 
-let score = localStorage.getItem('score') ? +localStorage.getItem('score') : 0;
+let score = localStorage.getItem('score')
+  ? JSON.parse(localStorage.getItem('score'))
+  : 0;
+
+console.log(score);
 
 let attempts = {
   first: {
@@ -76,6 +81,44 @@ let attempts = {
     attempted: false,
     correct: null,
     wordEntered: '',
+  },
+};
+
+let scoreStreak = {
+  first: {
+    streak: score !== 0 ? score.first.streak : 0,
+    pointsToIncrement: 200,
+    score: score !== 0 ? score.first.score : 0,
+  },
+
+  second: {
+    streak: score !== 0 ? score.second.streak : 0,
+    pointsToIncrement: 150,
+    score: score !== 0 ? score.second.score : 0,
+  },
+
+  third: {
+    streak: score !== 0 ? score.third.streak : 0,
+    pointsToIncrement: 100,
+    score: score !== 0 ? score.third.score : 0,
+  },
+
+  fourth: {
+    streak: score !== 0 ? score.fourth.streak : 0,
+    pointsToIncrement: 50,
+    score: score !== 0 ? score.fourth.score : 0,
+  },
+
+  fifth: {
+    streak: score !== 0 ? score.fifth.streak : 0,
+    pointsToIncrement: 25,
+    score: score !== 0 ? score.fifth.score : 0,
+  },
+
+  sixth: {
+    streak: score !== 0 ? score.sixth.streak : 0,
+    pointsToIncrement: 10,
+    score: score !== 0 ? score.sixth.score : 0,
   },
 };
 
@@ -216,52 +259,91 @@ const checkWord = () => {
       attempts[key].correct = wordEntered === ANSWER;
       // WIN
       if (attempts[key].correct === true) {
+        let newDiv = document.createElement('div');
         switch (key) {
           case 'first':
-            score += 150;
+            scoreStreak[key].streak++;
+            scoreStreak[key].score += scoreStreak[key].pointsToIncrement;
             break;
           case 'second':
-            score += 125;
+            scoreStreak[key].streak++;
+            scoreStreak[key].score += scoreStreak[key].pointsToIncrement;
             break;
           case 'third':
-            score += 100;
+            scoreStreak[key].streak++;
+            scoreStreak[key].score += scoreStreak[key].pointsToIncrement;
             break;
           case 'fourth':
-            score += 50;
+            scoreStreak[key].streak++;
+            scoreStreak[key].score += scoreStreak[key].pointsToIncrement;
             break;
           case 'fifth':
-            score += 25;
+            scoreStreak[key].streak++;
+            scoreStreak[key].score += scoreStreak[key].pointsToIncrement;
             break;
           case 'sixth':
-            score += 10;
+            scoreStreak[key].streak++;
+            scoreStreak[key].score += scoreStreak[key].pointsToIncrement;
             break;
         }
+
+        streakNodes.forEach((node, i) => {
+          let key;
+          let streak;
+          switch (i) {
+            case 0:
+              key = 'first';
+              streak = 'One';
+              break;
+            case 1:
+              key = 'second';
+              streak = 'Two';
+              break;
+            case 2:
+              key = 'third';
+              streak = 'Three';
+              break;
+            case 3:
+              key = 'fourth';
+              streak = 'Four';
+              break;
+            case 4:
+              key = 'fifth';
+              streak = 'Five';
+              break;
+            case 5:
+              key = 'sixth';
+              streak = 'Six';
+              break;
+          }
+          node.innerHTML = `${streak}: ${scoreStreak[key].streak}`;
+        });
+
         winOrLose.style.display = 'grid';
         winOrLose.style.borderColor = 'green';
         winOrLose.childNodes[1].childNodes[0].innerHTML = `${
           SUCCESS_WORDS[Math.floor(Math.random() * SUCCESS_WORDS.length)]
         }!`;
         winOrLose.style.color = 'green';
-        winOrLose.childNodes[3].childNodes[0].innerHTML = `Current Score: \n${score}`;
+        winOrLose.childNodes[3].childNodes[0].innerHTML = `Current Streak:`;
         winOrLose.childNodes[3].childNodes[0].style.fontSize = '2rem';
         NEWGAME.style.borderColor = 'green';
         NEWGAME.style.backgroundColor = 'green';
         correctWord.style.display = 'none';
 
-        localStorage.setItem('score', score);
+        localStorage.setItem('score', JSON.stringify(scoreStreak));
       }
       // OUT OF ATTEMPTS
       if (key === 'sixth' && attempts[key].correct === false) {
         let answer = document.createElement('p');
         let finalScore = document.createElement('p');
         let answerWas = document.createElement('p');
-        let wrapperDiv = document.createElement('div');
         answerWas.innerHTML = 'Answer Was:';
         answerWas.style.marginBottom = 0;
         answer.style.marginTop = 0;
         answer.classList.add('animation');
         finalScore.style.marginTop = 0;
-        finalScore.innerHTML = score;
+        finalScore.innerHTML = score.score;
         answer.innerHTML = ANSWER;
         winOrLose.style.display = 'grid';
         winOrLose.style.borderColor = 'red';
@@ -276,8 +358,10 @@ const checkWord = () => {
         NEWGAME.style.backgroundColor = 'red';
         correctWord.appendChild(answerWas);
         correctWord.appendChild(answer);
-        score = 0;
-        localStorage.setItem('score', score);
+        for (const key in scoreStreak) {
+          scoreStreak[key].score = 0;
+        }
+        localStorage.setItem('score', JSON.stringify(scoreStreak));
       }
       keyboardIndex = 0;
       break;
