@@ -39,12 +39,23 @@ const KEYBOARD = [...document.querySelectorAll('.key')];
 const NEWGAME = document.querySelector('.btn-new-game');
 let correctWord = document.querySelector('.correct-word');
 let streakNodes = [...document.querySelectorAll('.streak')];
+let streakAmountNodes = [...document.querySelectorAll('.streak-amount')];
+let streakHeader = document.querySelector('.streak-win-or-loss');
+let scoreNumber = document.querySelector('.score-number');
+let pointsToAdd = document.querySelector('#points-to-add');
+let previousScore = document.querySelector('#previous-score');
+let newScore = document.querySelector('#new-score');
+let scoreLabel = document.querySelector('#current-score-label');
+let pointsToAddLabel = document.querySelector('#points-to-add-label');
+let previousScoreLabel = document.querySelector('#previous-score-label');
+let newScoreLabel = document.querySelector('#new-score-label');
+let scoreNumberInner = document.querySelector('.score-number-inner');
 
 let score = localStorage.getItem('score')
   ? JSON.parse(localStorage.getItem('score'))
   : 0;
 
-console.log(score);
+let finalScoreTemp = 0;
 
 let attempts = {
   first: {
@@ -120,6 +131,8 @@ let scoreStreak = {
     pointsToIncrement: 10,
     score: score !== 0 ? score.sixth.score : 0,
   },
+  totalScore: score !== 0 ? score.totalScore : 0,
+  prevScore: score !== 0 ? score.totalScore : 0,
 };
 
 let keyboardIndex = 0;
@@ -154,6 +167,10 @@ const checkWord = () => {
   let tempNodes = [];
   let attemptedLetterToWatch;
   let tempAnswer = [...ANSWER];
+  let totalScore = 0;
+  let prevScore = 0;
+  let incrementer;
+  let winOrLoss = 'win';
   for (const key in attempts) {
     if (attempts[key].attempted === false) {
       nodes = [...document.querySelectorAll(`.${key}-word`)];
@@ -257,84 +274,68 @@ const checkWord = () => {
       nextAttemptNodes.forEach((node) => (node.disabled = false));
       key !== 'sixth' && nextAttemptNodes[0].focus();
       attempts[key].correct = wordEntered === ANSWER;
+
+      // for (const key in scoreStreak) {
+      //   console.log(key);
+      //   if (key !== 'totalScore' && key !== 'prevScore') {
+      //     console.log(scoreStreak.prevScore);
+      //     scoreStreak.prevScore += scoreStreak[key].score;
+      //   }
+      // }
+
       // WIN
+
       if (attempts[key].correct === true) {
         let newDiv = document.createElement('div');
+        winOrLoss = 'win';
         switch (key) {
           case 'first':
             scoreStreak[key].streak++;
             scoreStreak[key].score += scoreStreak[key].pointsToIncrement;
+            incrementer = scoreStreak[key].pointsToIncrement;
             break;
           case 'second':
             scoreStreak[key].streak++;
             scoreStreak[key].score += scoreStreak[key].pointsToIncrement;
+            incrementer = scoreStreak[key].pointsToIncrement;
             break;
           case 'third':
             scoreStreak[key].streak++;
             scoreStreak[key].score += scoreStreak[key].pointsToIncrement;
+            incrementer = scoreStreak[key].pointsToIncrement;
             break;
           case 'fourth':
             scoreStreak[key].streak++;
             scoreStreak[key].score += scoreStreak[key].pointsToIncrement;
+            incrementer = scoreStreak[key].pointsToIncrement;
             break;
           case 'fifth':
             scoreStreak[key].streak++;
             scoreStreak[key].score += scoreStreak[key].pointsToIncrement;
+            incrementer = scoreStreak[key].pointsToIncrement;
             break;
           case 'sixth':
             scoreStreak[key].streak++;
             scoreStreak[key].score += scoreStreak[key].pointsToIncrement;
+            incrementer = scoreStreak[key].pointsToIncrement;
             break;
         }
-
-        streakNodes.forEach((node, i) => {
-          let key;
-          let streak;
-          switch (i) {
-            case 0:
-              key = 'first';
-              streak = 'One';
-              break;
-            case 1:
-              key = 'second';
-              streak = 'Two';
-              break;
-            case 2:
-              key = 'third';
-              streak = 'Three';
-              break;
-            case 3:
-              key = 'fourth';
-              streak = 'Four';
-              break;
-            case 4:
-              key = 'fifth';
-              streak = 'Five';
-              break;
-            case 5:
-              key = 'sixth';
-              streak = 'Six';
-              break;
-          }
-          node.innerHTML = `${streak}: ${scoreStreak[key].streak}`;
-        });
-
         winOrLose.style.display = 'grid';
         winOrLose.style.borderColor = 'green';
         winOrLose.childNodes[1].childNodes[0].innerHTML = `${
           SUCCESS_WORDS[Math.floor(Math.random() * SUCCESS_WORDS.length)]
         }!`;
         winOrLose.style.color = 'green';
-        winOrLose.childNodes[3].childNodes[0].innerHTML = `Current Streak:`;
-        winOrLose.childNodes[3].childNodes[0].style.fontSize = '2rem';
+        // streakHeader.innerHTML = `Current Streak:`;
+        streakHeader.style.fontSize = '2rem';
         NEWGAME.style.borderColor = 'green';
         NEWGAME.style.backgroundColor = 'green';
         correctWord.style.display = 'none';
-
-        localStorage.setItem('score', JSON.stringify(scoreStreak));
+        // localStorage.setItem('score', JSON.stringify(scoreStreak));
       }
       // OUT OF ATTEMPTS
       if (key === 'sixth' && attempts[key].correct === false) {
+        winOrLoss = 'loss';
         let answer = document.createElement('p');
         let finalScore = document.createElement('p');
         let answerWas = document.createElement('p');
@@ -351,24 +352,87 @@ const checkWord = () => {
           FAIL_WORDS[Math.floor(Math.random() * FAIL_WORDS.length)]
         }...`;
         winOrLose.style.color = 'red';
-        winOrLose.childNodes[3].childNodes[0].innerHTML = `Final Score:`;
-        winOrLose.childNodes[3].appendChild(finalScore);
-        winOrLose.childNodes[3].firstChild.style.marginBottom = 0;
+        // streakHeader.innerHTML = `Current Streak:`;
+        // winOrLose.childNodes[3].appendChild(finalScore);
+        // winOrLose.childNodes[3].firstChild.style.marginBottom = 0;
         NEWGAME.style.borderColor = 'red';
         NEWGAME.style.backgroundColor = 'red';
         correctWord.appendChild(answerWas);
         correctWord.appendChild(answer);
+        finalScoreTemp = scoreStreak.totalScore;
         for (const key in scoreStreak) {
-          scoreStreak[key].score = 0;
+          if (key !== 'totalScore' && key !== 'prevScore') {
+            scoreStreak[key].score = 0;
+          } else {
+            scoreStreak.totalScore = 0;
+            scoreStreak.prevScore = 0;
+          }
         }
-        localStorage.setItem('score', JSON.stringify(scoreStreak));
+        // localStorage.setItem('score', JSON.stringify(scoreStreak));
       }
       keyboardIndex = 0;
       break;
     }
   }
+  streakNodes.forEach((node, i) => {
+    let key;
+    let streak;
+    switch (i) {
+      case 0:
+        key = 'first';
+        streak = 'One Attempt';
+        break;
+      case 1:
+        key = 'second';
+        streak = 'Two Attempts';
+        break;
+      case 2:
+        key = 'third';
+        streak = 'Three Attempts';
+        break;
+      case 3:
+        key = 'fourth';
+        streak = 'Four Attempts';
+        break;
+      case 4:
+        key = 'fifth';
+        streak = 'Five Attempts';
+        break;
+      case 5:
+        key = 'sixth';
+        streak = 'Six Attempts';
+        break;
+    }
+    node.innerHTML = `${streak}:`;
+    streakAmountNodes[i].innerHTML = ` ${scoreStreak[key].streak}`;
+  });
+  let temp32 = 0;
+  for (const key in scoreStreak) {
+    if (key !== 'totalScore' && key !== 'prevScore') {
+      temp32 += scoreStreak[key].score;
+    }
+  }
+  scoreStreak.totalScore = temp32;
+  console.log(scoreStreak.totalScore);
+  // scoreStreak.totalScore = totalScore;
+  localStorage.setItem('score', JSON.stringify(scoreStreak));
+  if (winOrLoss === 'win') {
+    pointsToAdd.innerHTML = `${incrementer ? incrementer : 0}`;
+    previousScore.innerHTML = `${scoreStreak.prevScore}`;
+    newScore.innerHTML = `${scoreStreak.totalScore}`;
+  } else {
+    scoreLabel.innerHTML = 'Final Score';
+    scoreNumberInner.style.gridTemplateColumns = 'auto';
+    pointsToAddLabel.style.display = 'none';
+    pointsToAdd.style.display = 'none';
+    previousScoreLabel.style.display = 'none';
+    previousScore.style.display = 'none';
+    newScoreLabel.style.display = 'none';
+    newScore.innerHTML = finalScoreTemp;
+    newScore.style.fontSize = '2rem';
+    newScore.style.color = 'rgb(0, 209, 0)';
+  }
 };
-
 const disableAttempts = () => {
   for (const key in attempts) {
     if (attempts[key].attempted === false) {

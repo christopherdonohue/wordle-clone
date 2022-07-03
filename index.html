@@ -318,15 +318,36 @@
       </div>
     </div>
     <div class="win-or-loss-container">
-      <div><p></p></div>
-      <div><p></p></div>
-      <div class="streakContainer">
-        <p class="streak" id="first-streak"></p>
-        <p class="streak" id="second-streak"></p>
-        <p class="streak" id="third-streak"></p>
-        <p class="streak" id="fourth-streak"></p>
-        <p class="streak" id="fifth-streak"></p>
-        <p class="streak" id="sixth-streak"></p>
+      <div class="header-win-or-loss"><p></p></div>
+      <div class="streakContainerOutter">
+        <div class="streak-win-or-loss">Current Streak</div>
+        <div class="streakContainerInner">
+          <p class="streak" id="first-streak"></p>
+          <p class="streak-amount"></p>
+          <p class="streak" id="second-streak"></p>
+          <p class="streak-amount"></p>
+          <p class="streak" id="third-streak"></p>
+          <p class="streak-amount"></p>
+          <p class="streak" id="fourth-streak"></p>
+          <p class="streak-amount"></p>
+          <p class="streak" id="fifth-streak"></p>
+          <p class="streak-amount"></p>
+          <p class="streak" id="sixth-streak"></p>
+          <p class="streak-amount"></p>
+        </div>
+      </div>
+      <div class="score-number-outter">
+        <div class="streak-win-or-loss" id="current-score-label">
+          Current Score
+        </div>
+        <div class="score-number-inner">
+          <p id="points-to-add-label">Points to Add:</p>
+          <p id="points-to-add"></p>
+          <p id="previous-score-label">Previous Score:</p>
+          <p id="previous-score"></p>
+          <p id="new-score-label">New Score:</p>
+          <p id="new-score"></p>
+        </div>
       </div>
       <div class="correct-word"></div>
       <div>

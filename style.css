@@ -123,10 +123,9 @@ input {
 .win-or-loss-container {
   display: none;
   flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
+  align-items: start;
   position: absolute;
-  background-color: rgb(23, 23, 25, 0.95);
+  background-color: rgb(23, 23, 25, 0.98);
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -139,7 +138,7 @@ input {
   color: red;
   border-radius: 4px;
   width: 15rem;
-  height: auto;
+  max-height: 35rem;
   text-align: center;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 1.9rem;
@@ -147,6 +146,9 @@ input {
   grid-template-rows: 1fr 1fr 1fr;
   grid-column: inherit;
   grid-template-columns: 1fr;
+  grid-template-rows: auto;
+  gap: 0.5rem;
+  padding: 1rem 0.5rem;
 }
 
 .btn-new-game {
@@ -157,7 +159,101 @@ input {
   border-radius: 3px;
   padding: 0.5rem 0.15rem;
   font-size: 1.5rem;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.header-win-or-loss > p {
+  margin-bottom: 0;
+  margin-top: 0;
+}
+
+.streak {
+  text-align: left;
+  padding-left: 1rem;
+}
+
+.streak-win-or-loss {
+  color: rgb(255, 255, 255);
+  text-decoration: underline;
+}
+
+.streakContainerOutter {
+  margin-top: 0;
+}
+
+.streakContainerInner {
+  display: grid;
+  grid-template-columns: 3.5fr 1fr;
+}
+
+.streakContainerInner > p {
+  margin: 0.3rem 0;
+  font-size: 1.3rem;
+  letter-spacing: 0.1ch;
+}
+
+#first-streak,
+#first-streak + p {
+  color: rgb(0, 209, 0);
+}
+
+#second-streak,
+#second-streak + p {
+  color: rgb(0, 107, 247);
+}
+
+#third-streak,
+#third-streak + p {
+  color: rgb(144, 25, 255);
+}
+
+#fourth-streak,
+#fourth-streak + p {
+  color: rgb(255, 25, 190);
+}
+
+#fifth-streak,
+#fifth-streak + p {
+  color: rgb(246, 255, 0);
+}
+
+#sixth-streak,
+#sixth-streak + p {
+  color: rgb(255, 0, 0);
+}
+
+.correct-word > p {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.score-number-inner {
+  display: grid;
+  grid-template-columns: 3.5fr 1fr;
+}
+.score-number-inner > p {
+  margin: 0.3rem 0;
+  font-size: 1.25rem;
+  letter-spacing: 0.1ch;
+}
+
+p[id*='label'] {
+  text-align: left;
+  padding-left: 1rem;
+}
+
+#points-to-add-label,
+#points-to-add-label + p {
+  color: rgb(0, 209, 0);
+}
+
+#previous-score-label,
+#previous-score-label + p {
+  color: rgb(0, 107, 247);
+}
+
+#new-score-label,
+#new-score-label + p {
+  color: rgb(144, 25, 255);
 }
 
 .keyboard-row.three {
@@ -588,6 +684,8 @@ input {
   letter-spacing: 0.15rem;
   font-family: Georgia, 'Times New Roman', Times, serif;
   font-style: italic;
+  margin-bottom: 0;
+  margin-top: 0;
 }
 
 @keyframes text {
