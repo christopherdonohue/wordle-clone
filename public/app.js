@@ -54,6 +54,7 @@ let pointsToAddLabel = document.querySelector('#points-to-add-label');
 let previousScoreLabel = document.querySelector('#previous-score-label');
 let newScoreLabel = document.querySelector('#new-score-label');
 let scoreNumberInner = document.querySelector('.score-number-inner');
+//let register = document.querySelector('.register-form');
 
 let score = localStorage.getItem('score')
   ? JSON.parse(localStorage.getItem('score'))

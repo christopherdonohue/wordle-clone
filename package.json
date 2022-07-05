@@ -1,0 +1,28 @@
+{
+  "name": "wordle-wannabe",
+  "version": "1.0.0",
+  "description": "Simple clone of the popular game \"Wordle.\" I do not own the rights or original idea for this game :P. This is just for demonstrative purposes.",
+  "main": "app.js",
+  "scripts": {
+    "devStart": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/christopherdonohue/wordle-clone.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/christopherdonohue/wordle-clone/issues"
+  },
+  "homepage": "https://github.com/christopherdonohue/wordle-clone#readme",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "express": "^4.18.1",
+    "mongoose": "^6.4.2"
+  },
+  "devDependencies": {
+    "dotenv": "^16.0.1",
+    "nodemon": "^2.0.18"
+  }
+}
