@@ -174,18 +174,21 @@ const updateScore = async (scoreJson) => {
   // let patchBody = { username: usernameForPatch };
   patchBody = JSON.stringify(scoreJson);
   if (id !== 'undefined' && id) {
-    res = await fetch(`http://localhost:3000/users/${id}/score`, {
-      method: 'PATCH',
-      mode: 'cors',
-      cache: 'no-cache',
-      credentials: 'same-origin',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      redirect: 'follow',
-      referrerPolicy: 'no-referrer',
-      body: patchBody,
-    });
+    res = await fetch(
+      `https://chrissyword.netlify.app/.netlify/functions/server/${id}/score`,
+      {
+        method: 'PATCH',
+        mode: 'cors',
+        cache: 'no-cache',
+        credentials: 'same-origin',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        redirect: 'follow',
+        referrerPolicy: 'no-referrer',
+        body: patchBody,
+      }
+    );
   }
 };
 const checkWord = () => {
@@ -575,31 +578,37 @@ const callFetch = async (json) => {
   let patchBody = { username: usernameForPatch };
   patchBody = JSON.stringify(patchBody);
   if (id !== 'undefined' && id) {
-    res = await fetch(`http://localhost:3000/users/${id}`, {
-      method: 'PATCH',
-      mode: 'cors',
-      cache: 'no-cache',
-      credentials: 'same-origin',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      redirect: 'follow',
-      referrerPolicy: 'no-referrer',
-      body: patchBody,
-    });
+    res = await fetch(
+      `https://chrissyword.netlify.app/.netlify/functions/server/${id}`,
+      {
+        method: 'PATCH',
+        mode: 'cors',
+        cache: 'no-cache',
+        credentials: 'same-origin',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        redirect: 'follow',
+        referrerPolicy: 'no-referrer',
+        body: patchBody,
+      }
+    );
   } else {
-    res = await fetch('http://localhost:3000/users', {
-      method: 'POST',
-      mode: 'cors',
-      cache: 'no-cache',
-      credentials: 'same-origin',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      redirect: 'follow',
-      referrerPolicy: 'no-referrer',
-      body: json,
-    });
+    res = await fetch(
+      'https://chrissyword.netlify.app/.netlify/functions/server',
+      {
+        method: 'POST',
+        mode: 'cors',
+        cache: 'no-cache',
+        credentials: 'same-origin',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        redirect: 'follow',
+        referrerPolicy: 'no-referrer',
+        body: json,
+      }
+    );
   }
   return res.json();
 };

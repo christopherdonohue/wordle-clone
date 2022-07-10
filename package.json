@@ -4,7 +4,9 @@
   "description": "Simple clone of the popular game \"Wordle.\" I do not own the rights or original idea for this game :P. This is just for demonstrative purposes.",
   "main": "app.js",
   "scripts": {
-    "devStart": "nodemon server.js"
+    "devStart": "nodemon server.js",
+    "start": "./node_modules/.bin/netlify-lambda serve src",
+    "build": "./node_modules/.bin/netlify-lambda build src"
   },
   "repository": {
     "type": "git",
@@ -17,12 +19,18 @@
   },
   "homepage": "https://github.com/christopherdonohue/wordle-clone#readme",
   "dependencies": {
+    "aws-sdk": "^2.1171.0",
     "bcrypt": "^5.0.1",
     "express": "^4.18.1",
-    "mongoose": "^6.4.2"
+    "mock-aws": "^1.2.3",
+    "mock-aws-s3": "^4.0.2",
+    "mongoose": "^6.4.2",
+    "netlify-lambda": "^2.0.15",
+    "nock": "^13.2.8",
+    "serverless-http": "^3.0.1"
   },
   "devDependencies": {
     "dotenv": "^16.0.1",
-    "nodemon": "^2.0.18"
+    "nodemon": "^2.0.19"
   }
 }
