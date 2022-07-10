@@ -57,6 +57,8 @@ let scoreNumberInner = document.querySelector('.score-number-inner');
 let username = document.querySelector('.username');
 let usernameFields = [...document.querySelectorAll('.usernameFields')];
 
+let globalWinOrLoss;
+
 let score = localStorage.getItem('score')
   ? JSON.parse(localStorage.getItem('score'))
   : 0;
@@ -139,6 +141,7 @@ let scoreStreak = {
   },
   totalScore: score !== 0 ? score.totalScore : 0,
   prevScore: score !== 0 ? score.totalScore : 0,
+  totalGames: score !== 0 ? score.totalGames : 0,
 };
 
 let keyboardIndex = 0;
@@ -162,6 +165,29 @@ const countLetters = (word) => {
   return arr;
 };
 
+const updateScore = async (scoreJson) => {
+  console.log(scoreJson);
+  let res;
+  // this is kinda stupid
+  let id = JSON.parse(localStorage.getItem('mongoId'));
+  //let usernameForPatch = JSON.parse(json).username;
+  // let patchBody = { username: usernameForPatch };
+  patchBody = JSON.stringify(scoreJson);
+  if (id !== 'undefined' && id) {
+    res = await fetch(`http://localhost:3000/users/${id}/score`, {
+      method: 'PATCH',
+      mode: 'cors',
+      cache: 'no-cache',
+      credentials: 'same-origin',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      redirect: 'follow',
+      referrerPolicy: 'no-referrer',
+      body: patchBody,
+    });
+  }
+};
 const checkWord = () => {
   let letters;
   let wordEntered;
@@ -177,6 +203,9 @@ const checkWord = () => {
   let prevScore = 0;
   let incrementer;
   let winOrLoss = 'win';
+  let scoreJson = {};
+  let userScoreTemp;
+  let attemptTemp;
   for (const key in attempts) {
     if (attempts[key].attempted === false) {
       nodes = [...document.querySelectorAll(`.${key}-word`)];
@@ -292,38 +321,52 @@ const checkWord = () => {
       // WIN
 
       if (attempts[key].correct === true) {
+        scoreStreak.totalGames++;
         let newDiv = document.createElement('div');
+        globalWinOrLoss = 'win';
         winOrLoss = 'win';
         switch (key) {
           case 'first':
             scoreStreak[key].streak++;
             scoreStreak[key].score += scoreStreak[key].pointsToIncrement;
+            userScoreTemp = scoreStreak[key].streak;
             incrementer = scoreStreak[key].pointsToIncrement;
+            attemptTemp = 'firstAttempts';
             break;
           case 'second':
             scoreStreak[key].streak++;
             scoreStreak[key].score += scoreStreak[key].pointsToIncrement;
+            userScoreTemp = scoreStreak[key].streak;
             incrementer = scoreStreak[key].pointsToIncrement;
+            attemptTemp = 'secondAttempts';
             break;
           case 'third':
             scoreStreak[key].streak++;
             scoreStreak[key].score += scoreStreak[key].pointsToIncrement;
+            userScoreTemp = scoreStreak[key].streak;
             incrementer = scoreStreak[key].pointsToIncrement;
+            attemptTemp = 'thirdAttempts';
             break;
           case 'fourth':
             scoreStreak[key].streak++;
             scoreStreak[key].score += scoreStreak[key].pointsToIncrement;
+            userScoreTemp = scoreStreak[key].streak;
             incrementer = scoreStreak[key].pointsToIncrement;
+            attemptTemp = 'fourthAttempts';
             break;
           case 'fifth':
             scoreStreak[key].streak++;
             scoreStreak[key].score += scoreStreak[key].pointsToIncrement;
+            userScoreTemp = scoreStreak[key].streak;
             incrementer = scoreStreak[key].pointsToIncrement;
+            attemptTemp = 'fifthAttempts';
             break;
           case 'sixth':
             scoreStreak[key].streak++;
             scoreStreak[key].score += scoreStreak[key].pointsToIncrement;
+            userScoreTemp = scoreStreak[key].streak;
             incrementer = scoreStreak[key].pointsToIncrement;
+            attemptTemp = 'sixthAttempts';
             break;
         }
         winOrLose.style.display = 'grid';
@@ -341,7 +384,10 @@ const checkWord = () => {
       }
       // OUT OF ATTEMPTS
       if (key === 'sixth' && attempts[key].correct === false) {
+        scoreStreak.totalGames++;
+        globalWinOrLoss = 'loss';
         winOrLoss = 'loss';
+        attemptTemp = 'loss';
         let answer = document.createElement('p');
         let finalScore = document.createElement('p');
         let answerWas = document.createElement('p');
@@ -380,6 +426,7 @@ const checkWord = () => {
       break;
     }
   }
+
   streakNodes.forEach((node, i) => {
     let key;
     let streak;
@@ -387,26 +434,32 @@ const checkWord = () => {
       case 0:
         key = 'first';
         streak = 'One Attempt';
+
         break;
       case 1:
         key = 'second';
         streak = 'Two Attempts';
+
         break;
       case 2:
         key = 'third';
         streak = 'Three Attempts';
+
         break;
       case 3:
         key = 'fourth';
         streak = 'Four Attempts';
+
         break;
       case 4:
         key = 'fifth';
         streak = 'Five Attempts';
+
         break;
       case 5:
         key = 'sixth';
         streak = 'Six Attempts';
+
         break;
     }
     node.innerHTML = `${streak}:`;
@@ -414,15 +467,20 @@ const checkWord = () => {
   });
   let temp32 = 0;
   for (const key in scoreStreak) {
-    if (key !== 'totalScore' && key !== 'prevScore') {
+    if (key !== 'totalScore' && key !== 'prevScore' && key !== 'totalGames') {
       temp32 += scoreStreak[key].score;
     }
   }
   scoreStreak.totalScore = temp32;
-  console.log(scoreStreak.totalScore);
   // scoreStreak.totalScore = totalScore;
-  console.log(JSON.stringify(scoreStreak));
   localStorage.setItem('score', JSON.stringify(scoreStreak));
+
+  scoreJson = {
+    attempt: attemptTemp,
+    attemptScore: attemptTemp !== 'loss' ? 1 : 0,
+    totalScore: attemptTemp !== 'loss' ? scoreStreak.totalScore : 0,
+  };
+
   if (winOrLoss === 'win') {
     pointsToAdd.innerHTML = `${incrementer ? incrementer : 0}`;
     previousScore.innerHTML = `${scoreStreak.prevScore}`;
@@ -438,6 +496,10 @@ const checkWord = () => {
     newScore.innerHTML = finalScoreTemp;
     newScore.style.fontSize = '2rem';
     newScore.style.color = 'rgb(0, 209, 0)';
+  }
+
+  if (globalWinOrLoss === 'win' || globalWinOrLoss === 'loss') {
+    updateScore(scoreJson);
   }
 };
 const disableAttempts = () => {
@@ -472,7 +534,6 @@ KEYBOARD.forEach((key) => {
     for (const attr in attempts) {
       if (attempts[attr].attempted === false) {
         nodes = [...document.querySelectorAll(`.${attr}-word`)];
-        console.log(key.innerHTML);
         if (key.innerHTML === 'Enter') {
           checkWord();
           break;
@@ -554,6 +615,8 @@ const submitUsername = (event) => {
     fourthAttempts: scoreStreak.fourth.streak,
     fiveAttempts: scoreStreak.fifth.streak,
     sixAttempts: scoreStreak.sixth.streak,
+    currentScore: scoreStreak.totalScore,
+    totalGames: scoreStreak.totalGames,
   };
   let json = JSON.stringify(obj);
   callFetch(json).then((data) => {

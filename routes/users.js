@@ -46,8 +46,20 @@ router.patch('/:id', getUser, async (req, res) => {
   if (req.body.username !== null) {
     res.user.username = req.body.username;
   }
-  if (req.body.firstAttempts !== null) {
-    res.user.firstAttempts = req.body.firstAttempts;
+  try {
+    const updatedUser = await res.user.save();
+    res.json(updatedUser);
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+});
+
+router.patch('/:id/score', getUser, async (req, res) => {
+  if (req.body.attemptScore !== null && req.body.attempt) {
+    res.user[req.body.attempt] +=
+      req.body.attempt !== 'loss' ? req.body.attemptScore : 1;
+    res.user.currentScore = req.body.totalScore;
+    res.user.totalGames += 1;
   }
   try {
     const updatedUser = await res.user.save();

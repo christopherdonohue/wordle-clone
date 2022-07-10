@@ -271,13 +271,6 @@ p[id*='label'] {
   gap: 4px;
 }
 
-@media (max-width: 1469px) {
-  .win-or-loss-container {
-    position: absolute;
-    right: 0;
-  }
-}
-
 @media (max-width: 798px) {
   .main-container {
     display: grid;
@@ -727,14 +720,40 @@ p[id*='label'] {
 .usernameFields {
   display: none;
   font-size: 6vmin;
-
   height: auto;
 }
 
 .usernameFields-show {
   font-size: 6vmin;
-
   height: auto;
+}
+
+@media (min-width: 578px) {
+  .username-container {
+    display: flex;
+    gap: 0;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .username-container > input {
+    font-size: 2.1rem !important;
+    margin-bottom: 0.5rem;
+  }
+}
+
+@media (min-width: 713px) {
+  .username-container {
+    display: flex;
+    gap: 0;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .username-container > input {
+    font-size: 2.7rem !important;
+    margin-bottom: 0.5rem;
+  }
 }
 
 #username-submit {
@@ -755,8 +774,7 @@ p[id*='label'] {
 }
 
 .userContainer {
-  border: 1px solid rgb(135, 255, 80);
-  border-radius: 3px;
+  border: 4px solid rgb(135, 255, 80);
   color: white;
   max-width: 20rem;
   width: 60%;
@@ -807,4 +825,11 @@ nav {
   color: white;
   text-decoration: none;
   /* margin-left: 0.5rem; */
+}
+
+.current-score-lb {
+  display: grid;
+  grid-template-columns: auto;
+  font-size: 1.5rem;
+  text-align: center;
 }
