@@ -54,7 +54,8 @@ let pointsToAddLabel = document.querySelector('#points-to-add-label');
 let previousScoreLabel = document.querySelector('#previous-score-label');
 let newScoreLabel = document.querySelector('#new-score-label');
 let scoreNumberInner = document.querySelector('.score-number-inner');
-//let register = document.querySelector('.register-form');
+let username = document.querySelector('.username');
+let usernameFields = [...document.querySelectorAll('.usernameFields')];
 
 let score = localStorage.getItem('score')
   ? JSON.parse(localStorage.getItem('score'))
@@ -420,6 +421,7 @@ const checkWord = () => {
   scoreStreak.totalScore = temp32;
   console.log(scoreStreak.totalScore);
   // scoreStreak.totalScore = totalScore;
+  console.log(JSON.stringify(scoreStreak));
   localStorage.setItem('score', JSON.stringify(scoreStreak));
   if (winOrLoss === 'win') {
     pointsToAdd.innerHTML = `${incrementer ? incrementer : 0}`;
@@ -447,14 +449,16 @@ const disableAttempts = () => {
 };
 
 document.addEventListener('keydown', (e) => {
-  if (e.key === 'Enter') checkWord();
-  else if (e.key !== 'Backspace') {
-    if (e.target.value) {
-      e.target.nextElementSibling.focus();
-    }
-  } else if (e.key === 'Backspace') {
-    if (!e.target.value) {
-      e.target.previousElementSibling.focus();
+  if (e.target.id !== 'usernameField') {
+    if (e.key === 'Enter') checkWord();
+    else if (e.key !== 'Backspace') {
+      if (e.target.value) {
+        e.target.nextElementSibling.focus();
+      }
+    } else if (e.key === 'Backspace') {
+      if (!e.target.value) {
+        e.target.previousElementSibling.focus();
+      }
     }
   }
 });
@@ -489,3 +493,73 @@ KEYBOARD.forEach((key) => {
 });
 
 NEWGAME.addEventListener('click', () => history.go(0));
+
+username.addEventListener('click', () => {
+  usernameFields.forEach((field) => {
+    if (field.classList.contains('usernameFields')) {
+      field.classList.remove('usernameFields');
+      field.classList.add('usernameFields-show');
+    } else {
+      field.classList.add('usernameFields');
+      field.classList.remove('usernameFields-show');
+    }
+  });
+});
+
+const callFetch = async (json) => {
+  let res;
+  // this is kinda stupid
+  let id = JSON.parse(localStorage.getItem('mongoId'));
+  let usernameForPatch = JSON.parse(json).username;
+  let patchBody = { username: usernameForPatch };
+  patchBody = JSON.stringify(patchBody);
+  if (id !== 'undefined' && id) {
+    res = await fetch(`http://localhost:3000/users/${id}`, {
+      method: 'PATCH',
+      mode: 'cors',
+      cache: 'no-cache',
+      credentials: 'same-origin',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      redirect: 'follow',
+      referrerPolicy: 'no-referrer',
+      body: patchBody,
+    });
+  } else {
+    res = await fetch('http://localhost:3000/users', {
+      method: 'POST',
+      mode: 'cors',
+      cache: 'no-cache',
+      credentials: 'same-origin',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      redirect: 'follow',
+      referrerPolicy: 'no-referrer',
+      body: json,
+    });
+  }
+  return res.json();
+};
+
+const submitUsername = (event) => {
+  event.preventDefault();
+  localStorage.setItem('username', event.target[0].value);
+  let obj = {
+    username: event.target[0].value,
+    firstAttempts: scoreStreak.first.streak,
+    secondAttempts: scoreStreak.second.streak,
+    thirdAttempts: scoreStreak.third.streak,
+    fourthAttempts: scoreStreak.fourth.streak,
+    fiveAttempts: scoreStreak.fifth.streak,
+    sixAttempts: scoreStreak.sixth.streak,
+  };
+  let json = JSON.stringify(obj);
+  callFetch(json).then((data) => {
+    console.log(data);
+    if (data._id) {
+      localStorage.setItem('mongoId', JSON.stringify(data._id));
+    }
+  });
+};

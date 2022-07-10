@@ -21,7 +21,14 @@ router.post('/', async (req, res) => {
   if (!user) {
     user = new User({
       username: req.body.username,
-      password: bcrypt.hashSync(req.body.password, 10),
+      firstAttempts: req.body.firstAttempts,
+      secondAttempts: req.body.secondAttempts,
+      thirdAttempts: req.body.thirdAttempts,
+      fourthAttempts: req.body.fourthAttempts,
+      fifthAttempts: req.body.fifthAttempts,
+      sixthAttempts: req.body.sixthAttempts,
+      totalGames: req.body.totalGames,
+      currentScore: req.body.currentScore,
     });
   } else {
     res.status(400).json({ message: 'Username already exists.' });
@@ -39,8 +46,8 @@ router.patch('/:id', getUser, async (req, res) => {
   if (req.body.username !== null) {
     res.user.username = req.body.username;
   }
-  if (req.body.password !== null) {
-    res.user.password = req.body.password;
+  if (req.body.firstAttempts !== null) {
+    res.user.firstAttempts = req.body.firstAttempts;
   }
   try {
     const updatedUser = await res.user.save();

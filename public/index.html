@@ -8,13 +8,38 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <nav>
+    <!-- <nav>
       <ul>
-        <li class="register"><a href="register.html">Register</a></li>
+        <li class="username">Username</li>
+        <li class="leaderboard"><a href="leaderboard.html">Leaderboard</a></li>
       </ul>
-    </nav>
+    </nav> -->
     <div class="row-container">
       <div class="main-container-outer">
+        <nav>
+          <ul class="main-nav">
+            <li class="username">Username</li>
+            <li class="leaderboard">
+              <a href="leaderboard.html" id="leaderboard-a">Leaderboard</a>
+            </li>
+          </ul>
+        </nav>
+        <div>
+          <form onsubmit="submitUsername(event)" class="username-container">
+            <input
+              class="usernameFields"
+              type="text"
+              name="usernameField"
+              id="usernameField"
+            />
+            <input
+              class="usernameFields"
+              type="submit"
+              value="Submit"
+              id="username-submit"
+            />
+          </form>
+        </div>
         <div class="main-container">
           <input
             type="text"
