@@ -36,6 +36,8 @@ const FAIL_WORDS = [
 let ANSWER =
   POTENTIAL_WORDS[Math.floor(Math.random() * POTENTIAL_WORDS.length)];
 
+ANSWER = 'MANGO';
+
 console.log(ANSWER);
 
 const winOrLose = document.querySelector('.win-or-loss-container');
