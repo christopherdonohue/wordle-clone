@@ -1,15 +1,18 @@
 async function callFetch(json) {
-  const res = await fetch('http://localhost:3000/users', {
-    method: 'GET',
-    mode: 'cors',
-    cache: 'no-cache',
-    credentials: 'same-origin',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    redirect: 'follow',
-    referrerPolicy: 'no-referrer',
-  });
+  const res = await fetch(
+    'https://chrissyword.netlify.app/.netlify/functions/server',
+    {
+      method: 'GET',
+      mode: 'cors',
+      cache: 'no-cache',
+      credentials: 'same-origin',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      redirect: 'follow',
+      referrerPolicy: 'no-referrer',
+    }
+  );
   return res.json();
 }
 

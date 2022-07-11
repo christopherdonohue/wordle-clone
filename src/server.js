@@ -11,12 +11,12 @@ db.once('open', () => console.log('Connected to Database'));
 app.use(express.json());
 
 const userRoutes = require('../routes/users');
-// const router = express.Router();
+const router = express.Router();
+router.get('/', (req, res) => res.json({ messsage: 'hello' }));
 //app.use('/users', userRoutes);
 // app.use(express.static('../public'));
 app.use('/.netlify/functions/server', userRoutes);
 
-// router.get('/', (req, res) => res.json({ messsage: 'hello' }));
 //app.use('/.netlify/functions/server', router);
 //app.listen(3000, (req, res) => console.log('Server Started...'));
 
