@@ -36,7 +36,7 @@ const FAIL_WORDS = [
 ];
 
 let ANSWER =
-  smallerWordTest[Math.floor(Math.random() * smallerWordTest.length)];
+  POTENTIAL_WORDS[Math.floor(Math.random() * POTENTIAL_WORDS.length)];
 
 console.log(ANSWER);
 
