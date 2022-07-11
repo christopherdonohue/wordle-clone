@@ -166,7 +166,7 @@ const FAIL_WORDS = [
   'NOPE',
 ];
 
-let randomWordArr = [...POTENTIAL_WORDS, ...POTENTIAL_WORDS_TWO];
+let randomWordArr = [POTENTIAL_WORDS, POTENTIAL_WORDS_TWO];
 randomWordArr = randomWordArr[Math.floor(Math.random() * randomWordArr.length)];
 let ANSWER = randomWordArr[Math.floor(Math.random() * randomWordArr.length)];
 
