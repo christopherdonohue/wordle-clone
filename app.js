@@ -14,6 +14,8 @@ const POTENTIAL_WORDS = ['SPARK','MANGO','SPLAT','TOUCH','CLOWN','HAPPY', 'TOWEL
 'DREAM', 'TANGO', 'BULGE', 'YOUNG', 'HOTEL', 'SPANK', 'AGILE', 'PUNCH', 'MILKY', 'SNAKE', 'SNAIL', 'ADORE', 'SCUBA',
 'POWER', 'SMOKE', 'SUNNY', 'MUMMY', 'IRONY', 'IVORY', 'SOUTH', 'ANGER', 'FUZZY', 'PIZZA', 'SNACK', 'HAIRY', 'CROWN'];
 
+const smallerWordTest = ['MANGO', 'SOOTH', 'SPANK', 'PUNCH'];
+
 const SUCCESS_WORDS = [
   'Nice',
   'Excellent',
@@ -34,7 +36,7 @@ const FAIL_WORDS = [
 ];
 
 let ANSWER =
-  POTENTIAL_WORDS[Math.floor(Math.random() * POTENTIAL_WORDS.length)];
+  smallerWordTest[Math.floor(Math.random() * smallerWordTest.length)];
 
 console.log(ANSWER);
 
