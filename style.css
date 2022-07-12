@@ -780,6 +780,7 @@ p[id*='label'] {
   width: 60%;
   min-width: 17rem;
   padding-bottom: 0.75rem;
+  position: relative;
 }
 
 .userContainer > h2 {
@@ -787,6 +788,7 @@ p[id*='label'] {
   letter-spacing: 0.2ch;
   font-family: 'cool-font';
   color: rgb(135, 255, 80);
+  margin-top: 0.27rem;
 }
 
 @font-face {
@@ -832,4 +834,19 @@ nav {
   grid-template-columns: auto;
   font-size: 1.5rem;
   text-align: center;
+}
+
+.rank-div {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 1.57rem;
+}
+
+.rank-div > p {
+  margin-top: 0rem;
+  margin-left: 0.5rem;
+  font-family: 'cool-font';
+  margin-top: 0.27rem;
+  color: rgb(255, 25, 190);
 }
