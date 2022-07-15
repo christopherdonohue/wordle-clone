@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let rankP = document.createElement('p');
         rankP.innerHTML = `${index + 1}`;
         rankDiv.classList.add('rank-div');
-        rankDiv.append(rankP);
+        rankDiv.appendChild(rankP);
         let attempts = [
           user.firstAttempts,
           user.secondAttempts,
@@ -54,27 +54,27 @@ document.addEventListener('DOMContentLoaded', () => {
           let p2 = document.createElement('p');
 
           switch (i) {
-            case (i = 0):
+            case 0:
               dynamicAttemptString = 'One Attempt';
               dynamicId = 'first-streak';
               break;
-            case (i = 1):
+            case 1:
               dynamicAttemptString = 'Two Attempts';
               dynamicId = 'second-streak';
               break;
-            case (i = 2):
+            case 2:
               dynamicAttemptString = 'Three Attempts';
               dynamicId = 'third-streak';
               break;
-            case (i = 3):
+            case 3:
               dynamicAttemptString = 'Four Attempts';
               dynamicId = 'fourth-streak';
               break;
-            case (i = 4):
+            case 4:
               dynamicAttemptString = 'Five Attempts';
               dynamicId = 'fifth-streak';
               break;
-            case (i = 5):
+            case 5:
               dynamicAttemptString = 'Six Attempts';
               dynamicId = 'sixth-streak';
               break;
@@ -85,8 +85,8 @@ document.addEventListener('DOMContentLoaded', () => {
           p2.innerHTML = attempt;
           p2.style.textAlign = 'center';
 
-          streakContainer.append(p1);
-          streakContainer.append(p2);
+          streakContainer.appendChild(p1);
+          streakContainer.appendChild(p2);
         });
         // this is kinda stupid
         p3.innerHTML = `Current Score`;
@@ -106,20 +106,20 @@ document.addEventListener('DOMContentLoaded', () => {
         p6.style.color = 'rgb(0, 107, 247)';
         p5.innerHTML = user.currentScore;
         p6.innerHTML = user.totalGames;
-        currentScoreContainer.append(p3);
-        currentScoreContainer.append(p5);
-        totalGamesContainer.append(p4);
-        totalGamesContainer.append(p6);
-        scoreContainer.append(currentScoreContainer);
-        scoreContainer.append(totalGamesContainer);
+        currentScoreContainer.appendChild(p3);
+        currentScoreContainer.appendChild(p5);
+        totalGamesContainer.appendChild(p4);
+        totalGamesContainer.appendChild(p6);
+        scoreContainer.appendChild(currentScoreContainer);
+        scoreContainer.appendChild(totalGamesContainer);
         scoreContainer.classList.add('current-score-lb');
         streakContainer.classList.add('streakContainerInner');
-        userContainer.append(rankDiv);
-        userContainer.append(usernameH2);
-        userContainer.append(streakContainer);
-        userContainer.append(scoreContainer);
+        userContainer.appendChild(rankDiv);
+        userContainer.appendChild(usernameH2);
+        userContainer.appendChild(streakContainer);
+        userContainer.appendChild(scoreContainer);
         userContainer.classList.add('userContainer');
-        mainContainer.append(userContainer);
+        mainContainer.appendChild(userContainer);
       });
   });
 });
