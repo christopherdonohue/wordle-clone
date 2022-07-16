@@ -428,7 +428,7 @@ const checkWord = () => {
             });
           }
         } else {
-          nodes[i].style.backgroundColor = '#404040';
+          nodes[i].style.backgroundColor = 'a';
           nodes[i].style.borderColor = '#404040';
           KEYBOARD.forEach((key) => {
             if (key.innerHTML === letter) {
