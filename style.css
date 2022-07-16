@@ -1,9 +1,11 @@
 body {
-  margin: 0 auto;
-  box-sizing: border-box;
+  /* margin-top: 0;
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box; */
   background-color: rgb(23, 23, 25);
-  width: 100vw;
-  height: auto;
+  /* width: 100vw;
+  height: auto; */
   /* display: flex;
   flex-direction: column; */
   /* gap: 0.35em; */
