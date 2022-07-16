@@ -340,7 +340,7 @@ p[id*='label'] {
 
 @media (max-width: 600px) {
   .username-container input {
-    font-size: 8vmin;
+    font-size: 6vmin;
   }
   .username-container {
     display: flex;
@@ -365,6 +365,10 @@ p[id*='label'] {
 }
 
 @media (max-width: 415px) {
+  #usernameField {
+    margin: 0.25rem auto;
+  }
+
   .key {
     width: 7.8vmin;
     height: 15vmin;
