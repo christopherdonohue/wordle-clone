@@ -3,347 +3,331 @@
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
     <title>Document</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <!-- <nav>
-      <ul>
-        <li class="username">Username</li>
-        <li class="leaderboard"><a href="leaderboard.html">Leaderboard</a></li>
-      </ul>
-    </nav> -->
-    <div class="row-container">
-      <div class="main-container-outer">
-        <nav>
-          <ul class="main-nav">
-            <li class="username">Username</li>
-            <li class="leaderboard">
-              <a href="leaderboard.html" id="leaderboard-a">Leaderboard</a>
-            </li>
-          </ul>
-        </nav>
-        <div>
-          <form onsubmit="submitUsername(event)" class="username-container">
-            <input
-              class="usernameFields"
-              type="text"
-              name="usernameField"
-              id="usernameField"
-            />
-            <input
-              class="usernameFields"
-              type="submit"
-              value="Submit"
-              id="username-submit"
-            />
-          </form>
+    <div class="main-container-outer">
+      <nav>
+        <ul class="main-nav">
+          <li class="username">Username</li>
+          <li class="leaderboard">
+            <a href="leaderboard.html" id="leaderboard-a">Leaderboard</a>
+          </li>
+        </ul>
+      </nav>
+      <div>
+        <form onsubmit="submitUsername(event)" class="username-container">
+          <input
+            class="usernameFields"
+            type="text"
+            name="usernameField"
+            id="usernameField"
+          />
+          <input
+            class="usernameFields"
+            type="submit"
+            value="Submit"
+            id="username-submit"
+          />
+        </form>
+      </div>
+      <div class="main-container">
+        <input
+          type="text"
+          class="first-word"
+          id="first-letter"
+          maxlength="1"
+          autocomplete="off"
+          autofocus
+        />
+        <input
+          type="text"
+          class="first-word"
+          id="second-letter"
+          maxlength="1"
+          autocomplete="off"
+        />
+        <input
+          type="text"
+          class="first-word"
+          id="third-letter"
+          maxlength="1"
+          autocomplete="off"
+        />
+        <input
+          type="text"
+          class="first-word"
+          id="fourth-letter"
+          maxlength="1"
+          autocomplete="off"
+        />
+        <input
+          type="text"
+          class="first-word"
+          id="fifth-letter"
+          maxlength="1"
+          autocomplete="off"
+        />
+
+        <input
+          type="text"
+          class="second-word"
+          id="first-letter"
+          maxlength="1"
+          autocomplete="off"
+          disabled
+        />
+        <input
+          type="text"
+          class="second-word"
+          id="second-letter"
+          maxlength="1"
+          autocomplete="off"
+          disabled
+        />
+        <input
+          type="text"
+          class="second-word"
+          id="third-letter"
+          maxlength="1"
+          autocomplete="off"
+          disabled
+        />
+        <input
+          type="text"
+          class="second-word"
+          id="fourth-letter"
+          maxlength="1"
+          autocomplete="off"
+          disabled
+        />
+        <input
+          type="text"
+          class="second-word"
+          id="fifth-letter"
+          maxlength="1"
+          autocomplete="off"
+          disabled
+        />
+
+        <input
+          type="text"
+          class="third-word"
+          id="first-letter"
+          maxlength="1"
+          autocomplete="off"
+          disabled
+        />
+        <input
+          type="text"
+          class="third-word"
+          id="second-letter"
+          maxlength="1"
+          autocomplete="off"
+          disabled
+        />
+        <input
+          type="text"
+          class="third-word"
+          id="third-letter"
+          maxlength="1"
+          autocomplete="off"
+          disabled
+        />
+        <input
+          type="text"
+          class="third-word"
+          id="fourth-letter"
+          maxlength="1"
+          autocomplete="off"
+          disabled
+        />
+        <input
+          type="text"
+          class="third-word"
+          id="fifth-letter"
+          maxlength="1"
+          autocomplete="off"
+          disabled
+        />
+
+        <input
+          type="text"
+          class="fourth-word"
+          id="first-letter"
+          maxlength="1"
+          autocomplete="off"
+          disabled
+        />
+        <input
+          type="text"
+          class="fourth-word"
+          id="second-letter"
+          maxlength="1"
+          autocomplete="off"
+          disabled
+        />
+        <input
+          type="text"
+          class="fourth-word"
+          id="third-letter"
+          maxlength="1"
+          autocomplete="off"
+          disabled
+        />
+        <input
+          type="text"
+          class="fourth-word"
+          id="fourth-letter"
+          maxlength="1"
+          autocomplete="off"
+          disabled
+        />
+        <input
+          type="text"
+          class="fourth-word"
+          id="fifth-letter"
+          maxlength="1"
+          autocomplete="off"
+          disabled
+        />
+
+        <input
+          type="text"
+          class="fifth-word"
+          id="first-letter"
+          maxlength="1"
+          autocomplete="off"
+          disabled
+        />
+        <input
+          type="text"
+          class="fifth-word"
+          id="second-letter"
+          maxlength="1"
+          autocomplete="off"
+          disabled
+        />
+        <input
+          type="text"
+          class="fifth-word"
+          id="third-letter"
+          maxlength="1"
+          autocomplete="off"
+          disabled
+        />
+        <input
+          type="text"
+          class="fifth-word"
+          id="fourth-letter"
+          maxlength="1"
+          autocomplete="off"
+          disabled
+        />
+        <input
+          type="text"
+          class="fifth-word"
+          id="fifth-letter"
+          maxlength="1"
+          autocomplete="off"
+          disabled
+        />
+
+        <input
+          type="text"
+          class="sixth-word"
+          id="first-letter"
+          maxlength="1"
+          autocomplete="off"
+          disabled
+        />
+        <input
+          type="text"
+          class="sixth-word"
+          id="second-letter"
+          maxlength="1"
+          autocomplete="off"
+          disabled
+        />
+        <input
+          type="text"
+          class="sixth-word"
+          id="third-letter"
+          maxlength="1"
+          autocomplete="off"
+          disabled
+        />
+        <input
+          type="text"
+          class="sixth-word"
+          id="fourth-letter"
+          maxlength="1"
+          autocomplete="off"
+          disabled
+        />
+        <input
+          type="text"
+          class="sixth-word"
+          id="fifth-letter"
+          maxlength="1"
+          autocomplete="off"
+          disabled
+        />
+      </div>
+      <div class="keyboard-container">
+        <div class="keyboard-row one">
+          <button class="key">Q</button>
+          <button class="key">W</button>
+          <button class="key">E</button>
+          <button class="key">R</button>
+          <button class="key">T</button>
+          <button class="key">Y</button>
+          <button class="key">U</button>
+          <button class="key">I</button>
+          <button class="key">O</button>
+          <button class="key">P</button>
         </div>
-        <div class="main-container">
-          <input
-            type="text"
-            class="first-word"
-            id="first-letter"
-            maxlength="1"
-            autocomplete="off"
-            autofocus
-          />
-          <input
-            type="text"
-            class="first-word"
-            id="second-letter"
-            maxlength="1"
-            autocomplete="off"
-          />
-          <input
-            type="text"
-            class="first-word"
-            id="third-letter"
-            maxlength="1"
-            autocomplete="off"
-          />
-          <input
-            type="text"
-            class="first-word"
-            id="fourth-letter"
-            maxlength="1"
-            autocomplete="off"
-          />
-          <input
-            type="text"
-            class="first-word"
-            id="fifth-letter"
-            maxlength="1"
-            autocomplete="off"
-          />
-
-          <input
-            type="text"
-            class="second-word"
-            id="first-letter"
-            maxlength="1"
-            autocomplete="off"
-            disabled
-          />
-          <input
-            type="text"
-            class="second-word"
-            id="second-letter"
-            maxlength="1"
-            autocomplete="off"
-            disabled
-          />
-          <input
-            type="text"
-            class="second-word"
-            id="third-letter"
-            maxlength="1"
-            autocomplete="off"
-            disabled
-          />
-          <input
-            type="text"
-            class="second-word"
-            id="fourth-letter"
-            maxlength="1"
-            autocomplete="off"
-            disabled
-          />
-          <input
-            type="text"
-            class="second-word"
-            id="fifth-letter"
-            maxlength="1"
-            autocomplete="off"
-            disabled
-          />
-
-          <input
-            type="text"
-            class="third-word"
-            id="first-letter"
-            maxlength="1"
-            autocomplete="off"
-            disabled
-          />
-          <input
-            type="text"
-            class="third-word"
-            id="second-letter"
-            maxlength="1"
-            autocomplete="off"
-            disabled
-          />
-          <input
-            type="text"
-            class="third-word"
-            id="third-letter"
-            maxlength="1"
-            autocomplete="off"
-            disabled
-          />
-          <input
-            type="text"
-            class="third-word"
-            id="fourth-letter"
-            maxlength="1"
-            autocomplete="off"
-            disabled
-          />
-          <input
-            type="text"
-            class="third-word"
-            id="fifth-letter"
-            maxlength="1"
-            autocomplete="off"
-            disabled
-          />
-
-          <input
-            type="text"
-            class="fourth-word"
-            id="first-letter"
-            maxlength="1"
-            autocomplete="off"
-            disabled
-          />
-          <input
-            type="text"
-            class="fourth-word"
-            id="second-letter"
-            maxlength="1"
-            autocomplete="off"
-            disabled
-          />
-          <input
-            type="text"
-            class="fourth-word"
-            id="third-letter"
-            maxlength="1"
-            autocomplete="off"
-            disabled
-          />
-          <input
-            type="text"
-            class="fourth-word"
-            id="fourth-letter"
-            maxlength="1"
-            autocomplete="off"
-            disabled
-          />
-          <input
-            type="text"
-            class="fourth-word"
-            id="fifth-letter"
-            maxlength="1"
-            autocomplete="off"
-            disabled
-          />
-
-          <input
-            type="text"
-            class="fifth-word"
-            id="first-letter"
-            maxlength="1"
-            autocomplete="off"
-            disabled
-          />
-          <input
-            type="text"
-            class="fifth-word"
-            id="second-letter"
-            maxlength="1"
-            autocomplete="off"
-            disabled
-          />
-          <input
-            type="text"
-            class="fifth-word"
-            id="third-letter"
-            maxlength="1"
-            autocomplete="off"
-            disabled
-          />
-          <input
-            type="text"
-            class="fifth-word"
-            id="fourth-letter"
-            maxlength="1"
-            autocomplete="off"
-            disabled
-          />
-          <input
-            type="text"
-            class="fifth-word"
-            id="fifth-letter"
-            maxlength="1"
-            autocomplete="off"
-            disabled
-          />
-
-          <input
-            type="text"
-            class="sixth-word"
-            id="first-letter"
-            maxlength="1"
-            autocomplete="off"
-            disabled
-          />
-          <input
-            type="text"
-            class="sixth-word"
-            id="second-letter"
-            maxlength="1"
-            autocomplete="off"
-            disabled
-          />
-          <input
-            type="text"
-            class="sixth-word"
-            id="third-letter"
-            maxlength="1"
-            autocomplete="off"
-            disabled
-          />
-          <input
-            type="text"
-            class="sixth-word"
-            id="fourth-letter"
-            maxlength="1"
-            autocomplete="off"
-            disabled
-          />
-          <input
-            type="text"
-            class="sixth-word"
-            id="fifth-letter"
-            maxlength="1"
-            autocomplete="off"
-            disabled
-          />
+        <div class="keyboard-row two">
+          <button class="key">A</button>
+          <button class="key">S</button>
+          <button class="key">D</button>
+          <button class="key">F</button>
+          <button class="key">G</button>
+          <button class="key">H</button>
+          <button class="key">J</button>
+          <button class="key">K</button>
+          <button class="key">L</button>
         </div>
-        <div class="keyboard-container">
-          <div class="keyboard-row one">
-            <button class="key">Q</button>
-            <button class="key">W</button>
-            <button class="key">E</button>
-            <button class="key">R</button>
-            <button class="key">T</button>
-            <button class="key">Y</button>
-            <button class="key">U</button>
-            <button class="key">I</button>
-            <button class="key">O</button>
-            <button class="key">P</button>
-          </div>
-          <!-- <br /> -->
-          <!-- <button class="hidden-key">X</button> -->
-          <div class="keyboard-row two">
-            <button class="key">A</button>
-            <button class="key">S</button>
-            <button class="key">D</button>
-            <button class="key">F</button>
-            <button class="key">G</button>
-            <button class="key">H</button>
-            <button class="key">J</button>
-            <button class="key">K</button>
-            <button class="key">L</button>
-          </div>
-
-          <!-- <br /> -->
-          <!-- <button class="hidden-key">X</button>
-          <button class="hidden-key">X</button>
-          <button class="hidden-key">X</button> -->
-          <div class="keyboard-row three">
-            <button class="key special" id="enter-key">Enter</button>
-            <button class="key">Z</button>
-            <button class="key">X</button>
-            <button class="key">C</button>
-            <button class="key">V</button>
-            <button class="key">B</button>
-            <button class="key">N</button>
-            <button class="key">M</button>
-            <button class="key special" id="backspace-key">
-              <div id="backspace-svg">
-                <svg
-                  width="32px"
-                  height="32px"
-                  viewBox="0 0 15 15"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M4.5 12.5L4.10957 12.8123C4.20445 12.931 4.34811 13 4.5 13V12.5ZM0.5 7.5L0.109566 7.18765C-0.0365219 7.37026 -0.0365219 7.62974 0.109566 7.81235L0.5 7.5ZM4.5 2.5V2C4.34811 2 4.20445 2.06904 4.10957 2.18765L4.5 2.5ZM14 3.5V11.5H15V3.5H14ZM13.5 12H4.5V13H13.5V12ZM4.89043 12.1877L0.890434 7.18765L0.109566 7.81235L4.10957 12.8123L4.89043 12.1877ZM0.890434 7.81235L4.89043 2.81235L4.10957 2.18765L0.109566 7.18765L0.890434 7.81235ZM4.5 3H13.5V2H4.5V3ZM14 11.5C14 11.7761 13.7761 12 13.5 12V13C14.3284 13 15 12.3284 15 11.5H14ZM15 3.5C15 2.67157 14.3284 2 13.5 2V3C13.7761 3 14 3.22386 14 3.5H15ZM6.14645 5.85355L10.1464 9.85355L10.8536 9.14645L6.85355 5.14645L6.14645 5.85355ZM10.1464 5.14645L6.14645 9.14645L6.85355 9.85355L10.8536 5.85355L10.1464 5.14645Z"
-                    fill="white"
-                  />
-                </svg>
-              </div>
-            </button>
-          </div>
-          <!-- <div class="keyboard-row four">
-            <button class="key special">Enter</button>
-            <button class="key special">Backspace</button>
-          </div> -->
+        <div class="keyboard-row three">
+          <button class="key special" id="enter-key">Enter</button>
+          <button class="key">Z</button>
+          <button class="key">X</button>
+          <button class="key">C</button>
+          <button class="key">V</button>
+          <button class="key">B</button>
+          <button class="key">N</button>
+          <button class="key">M</button>
+          <button class="key special" id="backspace-key">
+            <div id="backspace-svg">
+              <svg
+                width="32px"
+                height="32px"
+                viewBox="0 0 15 15"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M4.5 12.5L4.10957 12.8123C4.20445 12.931 4.34811 13 4.5 13V12.5ZM0.5 7.5L0.109566 7.18765C-0.0365219 7.37026 -0.0365219 7.62974 0.109566 7.81235L0.5 7.5ZM4.5 2.5V2C4.34811 2 4.20445 2.06904 4.10957 2.18765L4.5 2.5ZM14 3.5V11.5H15V3.5H14ZM13.5 12H4.5V13H13.5V12ZM4.89043 12.1877L0.890434 7.18765L0.109566 7.81235L4.10957 12.8123L4.89043 12.1877ZM0.890434 7.81235L4.89043 2.81235L4.10957 2.18765L0.109566 7.18765L0.890434 7.81235ZM4.5 3H13.5V2H4.5V3ZM14 11.5C14 11.7761 13.7761 12 13.5 12V13C14.3284 13 15 12.3284 15 11.5H14ZM15 3.5C15 2.67157 14.3284 2 13.5 2V3C13.7761 3 14 3.22386 14 3.5H15ZM6.14645 5.85355L10.1464 9.85355L10.8536 9.14645L6.85355 5.14645L6.14645 5.85355ZM10.1464 5.14645L6.14645 9.14645L6.85355 9.85355L10.8536 5.85355L10.1464 5.14645Z"
+                  fill="white"
+                />
+              </svg>
+            </div>
+          </button>
         </div>
       </div>
     </div>
