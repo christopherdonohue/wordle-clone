@@ -2,9 +2,8 @@ body {
   margin: 0 auto;
   box-sizing: border-box;
   background-color: rgb(23, 23, 25);
-  /* width: 100vw;
-  height: 100vh;
-  min-height: 500px; */
+  width: 100vw;
+  height: auto;
   /* display: flex;
   flex-direction: column; */
   /* gap: 0.35em; */
@@ -88,6 +87,7 @@ body {
 }
 
 input {
+  border-radius: 0;
   background-color: transparent;
   border: 2px solid gray;
   color: white;
