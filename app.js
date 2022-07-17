@@ -675,8 +675,13 @@ KEYBOARD.forEach((key) => {
           checkWord();
           break;
         } else if (key.id === 'backspace-key') {
-          nodes[keyboardIndex].value = '';
-          nodes[keyboardIndex - 1] && keyboardIndex--;
+          if (nodes[keyboardIndex].value) {
+            nodes[keyboardIndex].value = '';
+          } else {
+            nodes[keyboardIndex - 1].value = '';
+            nodes[keyboardIndex - 1] && keyboardIndex--;
+          }
+
           break;
         } else if (nodes[keyboardIndex]) {
           while (nodes[keyboardIndex + 1] && nodes[keyboardIndex].value) {
