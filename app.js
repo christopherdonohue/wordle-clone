@@ -428,7 +428,7 @@ const checkWord = () => {
             });
           }
         } else {
-          nodes[i].style.backgroundColor = 'a';
+          nodes[i].style.backgroundColor = '#404040';
           nodes[i].style.borderColor = '#404040';
           KEYBOARD.forEach((key) => {
             if (key.innerHTML === letter) {
@@ -675,14 +675,19 @@ KEYBOARD.forEach((key) => {
           checkWord();
           break;
         } else if (key.id === 'backspace-key') {
-          nodes[keyboardIndex - 1].value = '';
-          nodes[keyboardIndex - 1].focus();
-          keyboardIndex--;
+          nodes[keyboardIndex].value = '';
+          nodes[keyboardIndex - 1] && keyboardIndex--;
           break;
-        } else {
-          nodes[keyboardIndex].value = key.innerHTML;
+        } else if (nodes[keyboardIndex]) {
+          while (nodes[keyboardIndex + 1] && nodes[keyboardIndex].value) {
+            keyboardIndex++;
+          }
+          if (!nodes[keyboardIndex].value) {
+            nodes[keyboardIndex].value = key.innerHTML;
+          }
+
           nodes[keyboardIndex].nextElementSibling.focus();
-          keyboardIndex++;
+          nodes[keyboardIndex + 1] && keyboardIndex++;
           break;
         }
       }

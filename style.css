@@ -45,15 +45,7 @@ input:after {
   gap: 0.85vmin;
   position: relative;
   padding-bottom: 0.5em;
-  /* min-width: 678px; */
 }
-/* 
-.keyboard-row {
-  display: flex;  justify-content: center;
--webkit-justify-content: center;
-  align-items: center;
--webkit-align-items: center;
-} */
 
 .keyboard-container {
   display: -webkit-flex;
@@ -66,47 +58,54 @@ input:after {
   justify-content: center;
   -webkit-justify-content: center;
   margin-top: 0;
+  width: 100%;
 }
 
 .key {
   background: gray;
-  width: 1.97rem;
-  height: 3.1rem;
+  width: 8.5vmin;
+  max-width: 3.1rem;
+  height: 13.75vmin;
+  max-height: 6rem;
   border: 1px solid gray;
   border-radius: 2px;
   text-align: center;
   color: white;
-  font-size: 1.45rem;
+  font-size: 6vmin;
   font-weight: bolder;
   padding: 0;
   margin: 0;
 }
 
+.keyboard-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.25vmin;
+}
+
 .key.special {
-  width: 3.08rem;
-  height: inherit;
-  /* height: 3.9rem; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 13.5vmin;
+  max-width: 6rem;
 }
 
 #enter-key {
-  /* font-size: 0.98rem; */
-  font-size: 0.95rem;
+  font-size: 4vmin;
 }
 
 #backspace-svg {
-  display: -webkit-flex;
+  display: flex;
   justify-content: center;
-  -webkit-justify-content: center;
   align-items: center;
-  -webkit-align-items: center;
+  width: 100%;
+  height: 100%;
 }
 
-.keyboard-row.four {
-  display: inherit;
-  flex-direction: row;
-  justify-content: center;
-  -webkit-justify-content: center;
-  gap: 4px;
+svg {
+  width: 9vmin;
 }
 
 input {
@@ -257,21 +256,6 @@ p[id*='label'] {
   color: rgb(144, 25, 255);
 }
 
-.keyboard-row.three {
-  display: -webkit-flex;
-  flex-wrap: nowrap;
-  gap: 4px;
-}
-
-.keyboard-row.four {
-  width: 100%;
-  display: inherit;
-  flex-direction: row;
-  justify-content: center;
-  -webkit-justify-content: center;
-  gap: 4px;
-}
-
 .animation {
   animation: text 3s alternate infinite;
   font-weight: 700;
@@ -334,6 +318,25 @@ p[id*='label'] {
 .usernameFields-show {
   font-size: 6vmin;
   height: auto;
+}
+
+@media (min-width: 1000px) {
+  .key {
+    font-size: 1.675rem;
+    height: 4rem;
+  }
+
+  #enter-key {
+    font-size: 1.5rem;
+  }
+
+  .key.special {
+    height: 4rem;
+  }
+
+  svg {
+    width: 50%;
+  }
 }
 
 @media (min-width: 578px) {
@@ -466,6 +469,7 @@ nav {
   align-items: center;
   -webkit-align-items: center;
   gap: 1rem;
+  margin-top: 0.5rem;
 }
 
 #leaderboard-a {
