@@ -120,6 +120,14 @@ document.addEventListener('DOMContentLoaded', () => {
         userContainer.appendChild(scoreContainer);
         userContainer.classList.add('userContainer');
         mainContainer.appendChild(userContainer);
+
+        if (usernameH2.innerHTML.length > 8) {
+          let fontSize = 1.5;
+          for (let i = 7; i < usernameH2.innerHTML.length; i++) {
+            fontSize -= 0.1;
+          }
+          usernameH2.style.fontSize = `${fontSize}rem`;
+        }
       });
   });
 });

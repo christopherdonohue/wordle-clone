@@ -184,6 +184,7 @@ input {
 .streakContainerInner {
   display: grid;
   grid-template-columns: 3.5fr 1fr;
+  padding: 0 1.25rem;
 }
 
 .streakContainerInner > p {
@@ -407,6 +408,14 @@ p[id*='label'] {
 
 #username-submit {
   font-size: 5.9vmin;
+  cursor: pointer;
+  transition: 0.3s linear;
+}
+
+#username-submit:active,
+.key:active {
+  transform: scale(0.85);
+  box-shadow: 3px 2px 25px 1px rgba(0, 0, 0, 0.25);
 }
 
 .main-leaderboard-container {
@@ -470,6 +479,7 @@ nav {
   -webkit-align-items: center;
   gap: 1rem;
   margin-top: 0.5rem;
+  cursor: pointer;
 }
 
 #leaderboard-a {
@@ -498,4 +508,36 @@ nav {
   font-family: 'cool-font';
   margin-top: 0.27rem;
   color: rgb(255, 25, 190);
+}
+
+.toastNotificationDiv {
+  display: none;
+  position: absolute;
+  z-index: 999;
+  width: 50vmin;
+  min-width: 179px;
+  transform: translate(-50%, -50%);
+  padding: 0 0.65rem;
+  text-align: center;
+}
+
+.toast-notification-p {
+  margin: 0.25rem auto;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.toastNotificationDiv.error {
+  display: initial;
+  border: 1px solid red;
+  color: red;
+  background-color: rgb(98, 5, 5);
+  transform: translate(50%, 0%);
+  right: 50%;
+}
+
+.toastNotificationDiv.success {
+  display: initial;
+  border: 1px solid rgb(135, 255, 80);
+  color: rgb(135, 255, 80);
+  background-color: rgb(34, 108, 34);
 }

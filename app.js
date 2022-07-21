@@ -16,7 +16,8 @@ const POTENTIAL_WORDS_TWO = ['HONOR','TIGHT','ABODE','WHARF','SOOTH','CRAMP','SP
   'EPOCH','SCORN','SALAD','COMFY', 'UNZIP', 'LOFTY', 'SCREW', 'PRUNE', 'JOYED', 'LEMON', 'NOTED', 'SPOIL', 'TAXED', 'MAXED', 'GRASS','FROTH','LOOPY','EIGHT',
   'LLAMA','CLOSE','FORUM','BURNT','SHIFT','ENTER','SCARE','RESIN','STORM','CREAM','DREAM','TANGO','BULGE','YOUNG','HOTEL','SPANK','AGILE','PUNCH','MILKY',
   'SNAKE','SNAIL','ADORE','SCUBA','POWER','SMOKE','SUNNY','MUMMY','IRONY','IVORY','SOUTH','ANGER','FUZZY','PIZZA','SNACK','HAIRY','CROWN', 'BLUFF', 'RIVER',
-  'CREEP', 'BACON', 'TOAST', 'FRUIT', 'QUITE', 'SMILE', 'TEETH', 'GIANT', 'FLOOD', 'BLOOD', 'RADAR', 'BRAIN', 'PINCH', 'GIRTH', 'BIRTH', 'CHILD'
+  'CREEP', 'BACON', 'TOAST', 'FRUIT', 'QUITE', 'SMILE', 'TEETH', 'GIANT', 'FLOOD', 'BLOOD', 'RADAR', 'BRAIN', 'PINCH', 'GIRTH', 'BIRTH', 'CHILD', 'IDEAL',
+  'STOLE', 'CORAL', 'CHALK', 'VOCAL', 'RAVEN', 'TRIES', 'TIRED', 'AWAKE'
 ];
 
 const SUCCESS_WORDS = [
@@ -62,6 +63,9 @@ let newScoreLabel = document.querySelector('#new-score-label');
 let scoreNumberInner = document.querySelector('.score-number-inner');
 let username = document.querySelector('.username');
 let usernameFields = [...document.querySelectorAll('.usernameFields')];
+let usernameSubmit = document.querySelector('#username-submit');
+let toastNotificationDiv = document.querySelector('.toastNotificationDiv');
+let toastNotification = document.querySelector('.toast-notification-p');
 
 let globalWinOrLoss;
 
@@ -319,16 +323,7 @@ const checkWord = () => {
       key !== 'sixth' && nextAttemptNodes[0].focus();
       attempts[key].correct = wordEntered === ANSWER;
 
-      // for (const key in scoreStreak) {
-      //   console.log(key);
-      //   if (key !== 'totalScore' && key !== 'prevScore') {
-      //     console.log(scoreStreak.prevScore);
-      //     scoreStreak.prevScore += scoreStreak[key].score;
-      //   }
-      // }
-
       // WIN
-
       if (attempts[key].correct === true) {
         scoreStreak.totalGames++;
         let newDiv = document.createElement('div');
@@ -579,6 +574,8 @@ username.addEventListener('click', () => {
     if (field.classList.contains('usernameFields')) {
       field.classList.remove('usernameFields');
       field.classList.add('usernameFields-show');
+      toastNotificationDiv.classList.remove('error');
+      toastNotificationDiv.classList.remove('success');
     } else {
       field.classList.add('usernameFields');
       field.classList.remove('usernameFields-show');
@@ -586,11 +583,25 @@ username.addEventListener('click', () => {
   });
 });
 
+const toast = (msg) => {
+  if (msg === 'error') {
+    toastNotificationDiv.classList.add('error');
+  } else {
+    toastNotificationDiv.classList.add('success');
+  }
+  toastNotification.innerHTML = msg;
+  setTimeout(() => {
+    toastNotificationDiv.classList.remove('error');
+    toastNotificationDiv.classList.remove('success');
+  }, 3000);
+};
+
 const callFetch = async (json) => {
   let res;
   // this is kinda stupid
   let id = JSON.parse(localStorage.getItem('mongoId'));
   let usernameForPatch = JSON.parse(json).username;
+  let toastMessage;
   let patchBody = { username: usernameForPatch };
   patchBody = JSON.stringify(patchBody);
   if (id !== 'undefined' && id) {
@@ -609,6 +620,7 @@ const callFetch = async (json) => {
         body: patchBody,
       }
     );
+    toastMessage = 'Updated Succesfully!';
   } else {
     res = await fetch(
       'https://chrissyword.netlify.app/.netlify/functions/server',
@@ -625,6 +637,17 @@ const callFetch = async (json) => {
         body: json,
       }
     );
+    toastMessage = 'User Created!';
+  }
+
+  if (res.status === 200 || res.status === 201) {
+    toast(toastMessage);
+    usernameFields.forEach((field) => {
+      field.classList.add('usernameFields');
+      field.classList.remove('usernameFields-show');
+    });
+  } else {
+    toast('error');
   }
   return res.json();
 };
