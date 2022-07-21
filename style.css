@@ -184,6 +184,9 @@ input {
 .streakContainerInner {
   display: grid;
   grid-template-columns: 3.5fr 1fr;
+}
+
+.streakContainerInner:not([id='streak-homepage']) {
   padding: 0 1.25rem;
 }
 
